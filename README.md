@@ -41,7 +41,7 @@ Vérifier que l'on est sur sa branche :
 >Affiche les branches et met une * devant la branche sur laquelle vous êtes.
 
 Se mettre à jour par rapport à la branche main :
->```git rebase main [nom de la branche]```
+>```git rebase remotes/origin/main [nom de la branche]```
 
 Merge votre branche dans la main :
 >Aller sur le site <a href="https://github.com/Frooztyes/UGA-PROG5.git"> (lien)</a>\

@@ -32,8 +32,14 @@ struct memory_data {
     int be;
 };
 
+<<<<<<< HEAD
 memory memory_create(size_t size, int is_big_endian) {
     memory mem=NULL;
+=======
+memory memory_create(size_t size, int is_big_endian)
+{
+    memory mem = NULL;
+>>>>>>> Start of reading memory's word
     mem = malloc(sizeof(struct memory_data));
     if(mem == NULL){
         return NULL;
@@ -61,9 +67,20 @@ void memory_destroy(memory mem) {
     free(mem);
 }
 
+<<<<<<< HEAD
 int memory_read_byte(memory mem, uint32_t address, uint8_t *value) {
     if(mem->be == 0){
         *value = *(mem->data + address);
+=======
+int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
+{
+    if (mem->be == 0)
+    {
+        // fprintf(stderr, "Value vaut : %d || ", *value);
+        *value = *(mem->donnees + address);
+        // fprintf(stderr, "L'adresse dans la mémoire vaut : %d || ", *(mem->donnees + address));
+        // fprintf(stderr, "Value vaut : %d || ", *value);
+>>>>>>> Start of reading memory's word
         return 0;
     }
     else if(mem->be == 1){
@@ -102,6 +119,7 @@ int memory_read_half(memory mem, uint32_t address, uint16_t *value) {
     }
 }
 
+<<<<<<< HEAD
 int memory_read_word(memory mem, uint32_t address, uint32_t *value) {
     uint8_t v = 0;
     uint32_t v2 = 0;
@@ -122,6 +140,31 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value) {
             v2 = (uint32_t)v;
             *value |= (v2 << (8*(sizeof(uint32_t) - i - 1)));
         }
+=======
+int memory_read_word(memory mem, uint32_t address, uint32_t *value)
+{
+    if (mem->be == 0)
+    {
+        fprintf(stderr, "\n------------------------------------------\n\n");
+        fprintf(stderr, "Indien : %d || ", mem->be);
+        fprintf(stderr, "Byte : %i || ", address);
+        fprintf(stderr, "Taille : %ld\n", mem->taille);
+
+        int i = 0;
+        uint8_t v = 0;
+        uint32_t v2 = 0;
+        while (i < 4)
+        {
+            memory_read_byte(mem, i, &v);
+            v2 = (uint32_t)v;
+            fprintf(stderr, "Bit: %d, Octet n°%i : %i\n", i * 8, i, v);
+            *value |= (v2 << (i * 8));
+            i++;
+        }
+
+        fprintf(stderr, "\n\nLe mot est : %d", *value);
+        fprintf(stderr, "\n------------------------------------------\n\n");
+>>>>>>> Start of reading memory's word
         return 0;
     }
     else{

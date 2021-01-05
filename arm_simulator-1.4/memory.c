@@ -33,6 +33,7 @@ struct memory_data
     int be;
 };
 
+<<<<<<< HEAD
 memory memory_create(size_t size, int is_big_endian)
 {
 <<<<<<< HEAD
@@ -49,6 +50,16 @@ memory memory_create(size_t size, int is_big_endian)
 =======
 >>>>>>> Début Arm Instruction
     memory mem = NULL;
+=======
+<<<<<<< HEAD
+memory memory_create(size_t size, int is_big_endian) {
+    memory mem=NULL;
+=======
+memory memory_create(size_t size, int is_big_endian)
+{
+    memory mem = NULL;
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
     mem = malloc(sizeof(struct memory_data));
     if (mem == NULL)
     {
@@ -99,6 +110,7 @@ void memory_destroy(memory mem)
     free(mem);
 }
 
+<<<<<<< HEAD
 int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
 {
 <<<<<<< HEAD
@@ -129,6 +141,22 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
 =======
     if(address < memory_get_size(mem)){
         *value = *(mem->data+address);
+=======
+<<<<<<< HEAD
+int memory_read_byte(memory mem, uint32_t address, uint8_t *value) {
+    if(mem->be == 0){
+        *value = *(mem->data + address);
+=======
+int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
+{
+    if (mem->be == 0)
+    {
+        // fprintf(stderr, "Value vaut : %d || ", *value);
+        *value = *(mem->donnees + address);
+        // fprintf(stderr, "L'adresse dans la mémoire vaut : %d || ", *(mem->donnees + address));
+        // fprintf(stderr, "Value vaut : %d || ", *value);
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
         return 0;
     } else {
         return -1;
@@ -213,6 +241,7 @@ int memory_read_half(memory mem, uint32_t address, uint16_t *value)
 >>>>>>> add memory version
 }
 
+<<<<<<< HEAD
 int memory_read_word(memory mem, uint32_t address, uint32_t *value)
 {
 <<<<<<< HEAD
@@ -226,6 +255,7 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
         uint32_t v2 = 0;
         for (int i = address; i < sizeof(uint32_t); i++)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             memory_read_byte(mem, i, &v);
             v2 = (uint32_t)v;
@@ -266,13 +296,62 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
             *value |= (v2 << (8 * (sizeof(uint32_t) - i - 1)));
             i++;
 =======
+=======
+=======
+<<<<<<< HEAD
+int memory_read_word(memory mem, uint32_t address, uint32_t *value) {
+    uint8_t v = 0;
+    uint32_t v2 = 0;
+    if(mem->be == 0){
+        *value = 0; 
+        for(int i = 0; i< sizeof(uint32_t); i++){
+            memory_read_byte(mem, i, &v);
+            v2 = (uint32_t)v;
+            *value |= (v2 << (8*i));
+        }
+        
+        return 0;
+    }
+    else if(mem->be == 1){
+        *value = 0; 
+        for(int i = 0; i< sizeof(uint32_t); i++){
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
             memory_read_byte(mem, i, &v);
             v2 = (uint32_t)v;
             *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
 >>>>>>> Début Arm Instruction
         }
+<<<<<<< HEAD
 
         // fprintf(stderr, "\n\nLe mot est : %d", *value);
+=======
+=======
+int memory_read_word(memory mem, uint32_t address, uint32_t *value)
+{
+    if (mem->be == 0)
+    {
+        fprintf(stderr, "\n------------------------------------------\n\n");
+        fprintf(stderr, "Indien : %d || ", mem->be);
+        fprintf(stderr, "Byte : %i || ", address);
+        fprintf(stderr, "Taille : %ld\n", mem->taille);
+
+        int i = 0;
+        uint8_t v = 0;
+        uint32_t v2 = 0;
+        while (i < 4)
+        {
+            memory_read_byte(mem, i, &v);
+            v2 = (uint32_t)v;
+            fprintf(stderr, "Bit: %d, Octet n°%i : %i\n", i * 8, i, v);
+            *value |= (v2 << (i * 8));
+            i++;
+        }
+
+        fprintf(stderr, "\n\nLe mot est : %d", *value);
+        fprintf(stderr, "\n------------------------------------------\n\n");
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
         return 0;
 <<<<<<< HEAD
     }

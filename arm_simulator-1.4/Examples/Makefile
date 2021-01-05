@@ -182,12 +182,21 @@ CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/build-aux/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+<<<<<<< HEAD
 ACLOCAL = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AUTOCONF = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf
 AUTOHEADER = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader
 AUTOMAKE = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16
+=======
+ACLOCAL = ${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16
+AMTAR = $${TAR-tar}
+AM_DEFAULT_VERBOSITY = 1
+AUTOCONF = ${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16
+>>>>>>> Add start of memory read
 AWK = gawk
 CC = $(GCC_CROSS)
 CCAS = $(GCC_CROSS)
@@ -219,7 +228,11 @@ LEX_OUTPUT_ROOT = lex.yy
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
+<<<<<<< HEAD
 MAKEINFO = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo
+=======
+MAKEINFO = ${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo
+>>>>>>> Add start of memory read
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = arm_simulator
@@ -234,10 +247,17 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1.4
+<<<<<<< HEAD
 abs_builddir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples
 abs_srcdir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples
 abs_top_builddir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4
 abs_top_srcdir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4
+=======
+abs_builddir = /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/Examples
+abs_srcdir = /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/Examples
+abs_top_builddir = /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4
+abs_top_srcdir = /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4
+>>>>>>> Add start of memory read
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -256,7 +276,11 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
+<<<<<<< HEAD
 install_sh = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh
+=======
+install_sh = ${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh
+>>>>>>> Add start of memory read
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale

@@ -243,6 +243,7 @@ configure:3811: make -f confmf.GNU && cat confinc.out
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
 make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
 =======
@@ -256,6 +257,8 @@ make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simul
 make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
 >>>>>>> Début Arm Instruction
 =======
+=======
+>>>>>>> Start of reading memory's word
 make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
 make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
 =======
@@ -265,7 +268,14 @@ make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulat
 =======
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
+=======
+=======
+make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
+make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 this is the am__doit target
 configure:3814: $? = 0
 configure:3833: result: yes (GNU style)
@@ -282,6 +292,7 @@ configure:4194: checking lex output file root
 configure:4208: result: lex.yy
 configure:4213: checking lex library
 configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -306,6 +317,8 @@ configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
 =======
 =======
 >>>>>>> Add start of memory read
+=======
+>>>>>>> Start of reading memory's word
 /usr/bin/ld: /tmp/ccRgt6dD.o: in function `yylex':
 /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/lex.yy.c:871: undefined reference to `yywrap'
 /usr/bin/ld: /tmp/ccRgt6dD.o: in function `input':
@@ -317,12 +330,15 @@ configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
 =======
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> Start of reading memory's word
 /usr/bin/ld: /tmp/ccQnyigT.o: in function `yylex':
 /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/lex.yy.c:871: undefined reference to `yywrap'
 /usr/bin/ld: /tmp/ccQnyigT.o: in function `input':
 /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/lex.yy.c:1180: undefined reference to `yywrap'
 /usr/bin/ld: /tmp/ccQnyigT.o: in function `main':
 /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/conftest.l:17: undefined reference to `yywrap'
+<<<<<<< HEAD
 =======
 /usr/bin/ld: /tmp/ccRf7AQQ.o: in function `yylex':
 /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/lex.yy.c:871: undefined reference to `yywrap'
@@ -332,7 +348,12 @@ configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
 /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/conftest.l:17: undefined reference to `yywrap'
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
+=======
+=======
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 collect2: error: ld returned 1 exit status
 configure:4227: $? = 1
 configure: failed program was:
@@ -3630,6 +3651,7 @@ configure:5910: creating ./config.status
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add start of memory read
 =======
@@ -3663,6 +3685,8 @@ config.status:1212: $? = 0
 >>>>>>> add memory version
 =======
 >>>>>>> Add start of memory read
+=======
+>>>>>>> Start of reading memory's word
 ## ---------------- ##
 ## Cache variables. ##
 ## ---------------- ##
@@ -3773,6 +3797,7 @@ am_cv_prog_cc_c_o=yes
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACLOCAL='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
 =======
 ACLOCAL='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
@@ -3781,6 +3806,8 @@ ACLOCAL='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/
 ACLOCAL='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
 >>>>>>> Début Arm Instruction
 =======
+=======
+>>>>>>> Start of reading memory's word
 ACLOCAL='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
 =======
 <<<<<<< HEAD
@@ -3789,7 +3816,13 @@ ACLOCAL='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/bui
 ACLOCAL='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
+=======
+=======
+ACLOCAL='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -3801,6 +3834,7 @@ AM_V='$(V)'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 AUTOCONF='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf'
 AUTOHEADER='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader'
 AUTOMAKE='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
@@ -3815,6 +3849,8 @@ AUTOHEADER='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4
 AUTOMAKE='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
 >>>>>>> Début Arm Instruction
 =======
+=======
+>>>>>>> Start of reading memory's word
 AUTOCONF='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf'
 AUTOHEADER='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader'
 AUTOMAKE='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
@@ -3829,7 +3865,15 @@ AUTOHEADER='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1
 AUTOMAKE='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
+=======
+=======
+AUTOCONF='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf'
+AUTOHEADER='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader'
+AUTOMAKE='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 AWK='gawk'
 CC='gcc'
 CCAS='gcc'
@@ -3865,6 +3909,7 @@ LTLIBOBJS=''
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 MAKEINFO='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
 =======
 MAKEINFO='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
@@ -3873,6 +3918,8 @@ MAKEINFO='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4
 MAKEINFO='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
 >>>>>>> Début Arm Instruction
 =======
+=======
+>>>>>>> Start of reading memory's word
 MAKEINFO='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
 =======
 <<<<<<< HEAD
@@ -3881,7 +3928,13 @@ MAKEINFO='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/bu
 MAKEINFO='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
+=======
+=======
+MAKEINFO='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 MKDIR_P='/usr/bin/mkdir -p'
 OBJEXT='o'
 PACKAGE='arm_simulator'
@@ -3924,6 +3977,7 @@ infodir='${datarootdir}/info'
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 install_sh='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
 =======
 install_sh='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
@@ -3932,6 +3986,8 @@ install_sh='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1
 install_sh='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
 >>>>>>> Début Arm Instruction
 =======
+=======
+>>>>>>> Start of reading memory's word
 install_sh='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
 =======
 <<<<<<< HEAD
@@ -3940,7 +3996,13 @@ install_sh='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/
 install_sh='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
+=======
+=======
+install_sh='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'
@@ -4027,8 +4089,13 @@ configure: exit 0
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add start of memory read
+=======
+=======
+>>>>>>> Start of reading memory's word
+>>>>>>> Start of reading memory's word
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -4043,7 +4110,11 @@ generated by GNU Autoconf 2.69.  Invocation command line was
   CONFIG_COMMANDS = 
   $ ./config.status 
 
+<<<<<<< HEAD
 on DESKTOP-3V16CN5
+=======
+on DESKTOP-JKNVT0F
+>>>>>>> Start of reading memory's word
 
 config.status:901: creating Examples/Makefile
 config.status:901: creating Makefile
@@ -4051,9 +4122,15 @@ config.status:901: creating config.h
 config.status:1082: config.h is unchanged
 config.status:1130: executing depfiles commands
 config.status:1207: cd Examples       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+<<<<<<< HEAD
 make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/Examples'
 make[1]: Nothing to be done for 'am--depfiles'.
 make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/Examples'
+=======
+<<<<<<< HEAD
+make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
+make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
+>>>>>>> Start of reading memory's word
 config.status:1212: $? = 0
 config.status:1207: cd .       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
 make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
@@ -4158,3 +4235,14 @@ config.status:1082: config.h is unchanged
 =======
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
+=======
+make[1]: Entering directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
+make[1]: Nothing to be done for 'am--depfiles'.
+make[1]: Leaving directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
+config.status:1212: $? = 0
+config.status:1207: cd .       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make[1]: Entering directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4'
+make[1]: Nothing to be done for 'am--depfiles'.
+make[1]: Leaving directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4'
+config.status:1212: $? = 0
+>>>>>>> Start of reading memory's word

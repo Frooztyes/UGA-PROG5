@@ -55,9 +55,12 @@ memory memory_create(size_t size, int is_big_endian)
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     fprintf(stderr, "La taille est de : %ld\n", size);
 >>>>>>> Add start of memory read
+=======
+>>>>>>> Start of reading memory's word
 =======
 >>>>>>> Start of reading memory's word
     memory mem = NULL;

@@ -3886,6 +3886,7 @@ target_alias=''
 configure: exit 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -3935,6 +3936,8 @@ config.status:901: creating config.h
 config.status:1082: config.h is unchanged
 =======
 >>>>>>> Start of reading memory's word
+=======
+>>>>>>> Start of reading memory's word
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -3958,6 +3961,7 @@ config.status:1082: config.h is unchanged
 config.status:1130: executing depfiles commands
 config.status:1207: cd Examples       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
 <<<<<<< HEAD
+<<<<<<< HEAD
 make[1]: Entering directory '/home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/Examples'
 make[1]: Nothing to be done for 'am--depfiles'.
 make[1]: Leaving directory '/home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/Examples'
@@ -3970,6 +3974,8 @@ config.status:1212: $? = 0
 =======
 >>>>>>> Add start of memory read
 =======
+=======
+>>>>>>> Start of reading memory's word
 make[1]: Entering directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
 make[1]: Nothing to be done for 'am--depfiles'.
 make[1]: Leaving directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
@@ -3979,4 +3985,7 @@ make[1]: Entering directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_sim
 make[1]: Nothing to be done for 'am--depfiles'.
 make[1]: Leaving directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4'
 config.status:1212: $? = 0
+<<<<<<< HEAD
+>>>>>>> Start of reading memory's word
+=======
 >>>>>>> Start of reading memory's word

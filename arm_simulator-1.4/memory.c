@@ -34,7 +34,6 @@ struct memory_data
 
 memory memory_create(size_t size, int is_big_endian)
 {
-    fprintf(stderr, "La taille est de : %ld\n", size);
     memory mem = NULL;
     mem = malloc(sizeof(struct memory_data));
     if (mem == NULL)
@@ -73,10 +72,10 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
 {
     if (mem->be == 0)
     {
-        fprintf(stderr, "Value vaut : %d || ", *value);
-        *value = *(mem->donnees + address);        
-        fprintf(stderr, "L'adresse dans la mémoire vaut : %d || ", *(mem->donnees + address));
-        fprintf(stderr, "Value vaut : %d || ", *value);
+        // fprintf(stderr, "Value vaut : %d || ", *value);
+        *value = *(mem->donnees + address);
+        // fprintf(stderr, "L'adresse dans la mémoire vaut : %d || ", *(mem->donnees + address));
+        // fprintf(stderr, "Value vaut : %d || ", *value);
         return 0;
     }
     else if (mem->be == 1)
@@ -102,21 +101,23 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
         fprintf(stderr, "\n------------------------------------------\n\n");
         fprintf(stderr, "Indien : %d || ", mem->be);
         fprintf(stderr, "Byte : %i || ", address);
-        fprintf(stderr, "Taille : %ld || ", mem->taille);
-        fprintf(stderr, "L'adresse dans la mémoire avant est : %d\n\n", *(mem->donnees + (mem->taille - address - 1)));
-        
+        fprintf(stderr, "Taille : %ld\n", mem->taille);
+
         int i = 0;
         uint8_t v = 0;
-        while(i < 4){
+        uint32_t v2 = 0;
+        while (i < 4)
+        {
             memory_read_byte(mem, i, &v);
-            fprintf(stderr, "Byte n°%i : %i\n", i, v);
+            v2 = (uint32_t)v;
+            fprintf(stderr, "Bit: %d, Octet n°%i : %i\n", i * 8, i, v);
+            *value |= (v2 << (i * 8));
             i++;
-
         }
-        fprintf(stderr, "\n\nL'adresse de base est : %ls", value);
-        fprintf(stderr, "L'adresse dans la mémoire est : %d\n", *(mem->donnees + address));
+
+        fprintf(stderr, "\n\nLe mot est : %d", *value);
         fprintf(stderr, "\n------------------------------------------\n\n");
-        return -1;
+        return 0;
     }
     else if (mem->be == 1)
     {

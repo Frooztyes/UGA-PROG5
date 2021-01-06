@@ -74,7 +74,7 @@ int main() {
     uint16_t half_value = 0x5566, half_read;
     uint8_t *position;
     int i;
-
+    
     m[1] = memory_create(4,1);
     m[0] = memory_create(4,0);
     if ((m[1] == NULL) || (m[0] == NULL)) {
@@ -94,7 +94,7 @@ int main() {
     printf("- word read with the same endianess as me, ");
     memory_read_word(m[is_big_endian()], 0, &word_read);
     print_test(compare(&word_value, &word_read, 4, 0));
-    printf("Word read : %d || Word value : %d\n", word_value, word_read);
+    // printf("Word read : %d || Word value : %d\n", word_value, word_read);
     printf("- half read with the same endianess as me, ");
     memory_read_half(m[is_big_endian()], 0, &half_read);
     print_test(compare(&word_value, &half_read, 2, 0));

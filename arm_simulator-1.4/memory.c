@@ -25,25 +25,31 @@ Contact: Guillaume.Huard@imag.fr
 #include "util.h"
 #include <stdio.h>
 
-struct memory_data {
+struct memory_data
+{
     uint8_t *data;
     size_t taille;
     int be;
 };
 
-memory memory_create(size_t size, int is_big_endian) {
-    memory mem=NULL;
+memory memory_create(size_t size, int is_big_endian)
+{
+    memory mem = NULL;
     mem = malloc(sizeof(struct memory_data));
-    if(mem == NULL){
+    if (mem == NULL)
+    {
         return NULL;
     }
-    else{
-        mem->data = malloc(sizeof(uint8_t)*size);
-        if(mem->data == NULL){
+    else
+    {
+        mem->data = malloc(sizeof(uint8_t *) * size);
+        if (mem->data == NULL)
+        {
             free(mem);
             mem = NULL;
         }
-        else{
+        else
+        {
             mem->taille = size;
             mem->be = is_big_endian;
         }
@@ -51,141 +57,99 @@ memory memory_create(size_t size, int is_big_endian) {
     return mem;
 }
 
-size_t memory_get_size(memory mem) {
+size_t memory_get_size(memory mem)
+{
     return mem->taille;
 }
 
-void memory_destroy(memory mem) {
+void memory_destroy(memory mem)
+{
     free(mem->data);
     free(mem);
 }
 
-int memory_read_byte(memory mem, uint32_t address, uint8_t *value) {
-    if(mem->be == 0){
-        *value = *(mem->data + address);
+int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
+{
+    if(address < memory_get_size(mem)){
+        *value = *(mem->data+address);
         return 0;
-    }
-    else if(mem->be == 1){
-        *value = *(mem->data + (mem->taille - address -1));
-        return 0;
-    }
-    else{
+    } else {
         return -1;
     }
 }
 
-int memory_read_half(memory mem, uint32_t address, uint16_t *value) {
-    uint8_t v = 0;
-    uint16_t v2 = 0;
-    if(mem->be == 0){
-        *value = 0; 
-        for(int i = 0; i< sizeof(uint16_t); i++){
+int memory_read_half(memory mem, uint32_t address, uint16_t *value)
+{
+    if(address < memory_get_size(mem)){
+        *value = 0;
+        uint8_t v = 0;
+        uint16_t v2 = 0;
+        for (int i = 0; i < sizeof(uint16_t); i++)
+        {
             memory_read_byte(mem, i, &v);
-            v2 = (uint32_t)v;
-            *value |= (v2 << (8*i));
-        }
-        
-        return 0;
-    }
-    else if(mem->be == 1){
-        *value = 0; 
-        for(int i = 0; i< sizeof(uint16_t); i++){
-            memory_read_byte(mem, i, &v);
-            v2 = (uint32_t)v;
-            *value |= (v2 << (8*(sizeof(uint16_t) - i - 1)));
+            v2 = (uint16_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint16_t) - i - 1)));
         }
         return 0;
-    }
-    else{
+    } else {
         return -1;
     }
 }
 
-int memory_read_word(memory mem, uint32_t address, uint32_t *value) {
-    uint8_t v = 0;
-    uint32_t v2 = 0;
-    if(mem->be == 0){
-        *value = 0; 
-        for(int i = 0; i< sizeof(uint32_t); i++){
+int memory_read_word(memory mem, uint32_t address, uint32_t *value)
+{
+    if(address < memory_get_size(mem)){
+        *value = 0;
+        uint8_t v = 0;
+        uint32_t v2 = 0;
+        for (int i = address; i < sizeof(uint32_t); i++)
+        {
             memory_read_byte(mem, i, &v);
             v2 = (uint32_t)v;
-            *value |= (v2 << (8*i));
-        }
-        
-        return 0;
-    }
-    else if(mem->be == 1){
-        *value = 0; 
-        for(int i = 0; i< sizeof(uint32_t); i++){
-            memory_read_byte(mem, i, &v);
-            v2 = (uint32_t)v;
-            *value |= (v2 << (8*(sizeof(uint32_t) - i - 1)));
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
         }
         return 0;
-    }
-    else{
+    } else {
         return -1;
     }
 }
 
-int memory_write_byte(memory mem, uint32_t address, uint8_t value) {
-    if(mem->be == 0){
+int memory_write_byte(memory mem, uint32_t address, uint8_t value)
+{
+    if(address < memory_get_size(mem)){
         *(mem->data + address) = value;
-        return *(mem->data + address) == value ? 0 : -1;
-    }
-    else if(mem->be == 1){
-        *(mem->data + (mem->taille - address -1)) = value;
-        return *(mem->data + (mem->taille - address -1)) == value ? 0 : -1;
-    }
-    else{
-        return -1;
-    }
-
-}
-
-int memory_write_half(memory mem, uint32_t address, uint16_t value) {
-    uint8_t value2 = 0;
-    if(mem->be == 0){
-        for(int i = 0; i<sizeof(uint16_t); i++){
-            value2 = (value + i) >> 8*i;
-            memory_write_byte(mem, i, value2);
-        }
         return 0;
-    }
-    else if(mem->be == 1){
-        for(int i = 0; i<sizeof(uint16_t); i++){
-            int decal = sizeof(uint16_t) - i - 1;
-            value2 = (value + decal) >> 8*decal;
-            memory_write_byte(mem, i, value2);
-        }
-        return 0;
-    }
-    else{
+    } else {
         return -1;
     }
 }
 
-
-//erreur value donne une valeur bizarre
-
-int memory_write_word(memory mem, uint32_t address, uint32_t value) {
-    uint8_t value2 = 0;
-    if(mem->be == 0){
-        for(int i = 0; i<sizeof(uint32_t); i++){
-            value2 = (value + i) >> 8*i;
+int memory_write_half(memory mem, uint32_t address, uint16_t value)
+{
+    if(address < memory_get_size(mem)){
+        uint8_t value2 = 0;
+        for (int i = address; i < sizeof(uint16_t); i++)
+        {
+            value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint16_t) - i - 1)) >> 8 * (sizeof(uint16_t) - i - 1);
             memory_write_byte(mem, i, value2);
         }
         return 0;
+    } else {
+        return -1;
     }
-    else if(mem->be == 1){
-        for(int i = 0; i<sizeof(uint32_t); i++){
-            int decal = sizeof(uint32_t) - i - 1;
-            value2 = (value + decal) >> 8*decal;
+}
+
+int memory_write_word(memory mem, uint32_t address, uint32_t value)
+{
+    if(address < memory_get_size(mem)){
+        uint8_t value2 = 0;
+        for (int i = address; i < sizeof(uint32_t); i++)
+        {
+            value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint32_t) - i - 1)) >> 8 * (sizeof(uint32_t) - i - 1);
             memory_write_byte(mem, i, value2);
         }
         return 0;
-    }
-    else{
+    } else {
         return -1;
     }
 }

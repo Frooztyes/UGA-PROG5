@@ -241,6 +241,7 @@ configure:3796: checking whether make supports the include directive
 configure:3811: make -f confmf.GNU && cat confinc.out
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
 make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
 =======
@@ -249,6 +250,10 @@ make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulat
 make[1]: Entering directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4'
 make[1]: Leaving directory '/home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4'
 >>>>>>> add memory version
+=======
+make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
+make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
+>>>>>>> Début Arm Instruction
 this is the am__doit target
 configure:3814: $? = 0
 configure:3833: result: yes (GNU style)
@@ -265,6 +270,7 @@ configure:4194: checking lex output file root
 configure:4208: result: lex.yy
 configure:4213: checking lex library
 configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 /usr/bin/ld: /tmp/ccQnyigT.o: in function `yylex':
@@ -284,6 +290,14 @@ configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
 /usr/bin/ld: /tmp/cchPRu1S.o: in function `main':
 /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/conftest.l:17: undefined reference to `yywrap'
 >>>>>>> Add start of memory read
+=======
+/usr/bin/ld: /tmp/ccRgt6dD.o: in function `yylex':
+/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/lex.yy.c:871: undefined reference to `yywrap'
+/usr/bin/ld: /tmp/ccRgt6dD.o: in function `input':
+/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/lex.yy.c:1180: undefined reference to `yywrap'
+/usr/bin/ld: /tmp/ccRgt6dD.o: in function `main':
+/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/conftest.l:17: undefined reference to `yywrap'
+>>>>>>> Début Arm Instruction
 collect2: error: ld returned 1 exit status
 configure:4227: $? = 1
 configure: failed program was:
@@ -3716,10 +3730,14 @@ am_cv_prog_cc_c_o=yes
 ## ----------------- ##
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ACLOCAL='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
 =======
 ACLOCAL='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
 >>>>>>> Add start of memory read
+=======
+ACLOCAL='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16'
+>>>>>>> Début Arm Instruction
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -3729,6 +3747,7 @@ AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
 <<<<<<< HEAD
+<<<<<<< HEAD
 AUTOCONF='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf'
 AUTOHEADER='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader'
 AUTOMAKE='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
@@ -3737,6 +3756,11 @@ AUTOCONF='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4
 AUTOHEADER='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader'
 AUTOMAKE='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
 >>>>>>> Add start of memory read
+=======
+AUTOCONF='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf'
+AUTOHEADER='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader'
+AUTOMAKE='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16'
+>>>>>>> Début Arm Instruction
 AWK='gawk'
 CC='gcc'
 CCAS='gcc'
@@ -3770,10 +3794,14 @@ LIBOBJS=''
 LIBS=''
 LTLIBOBJS=''
 <<<<<<< HEAD
+<<<<<<< HEAD
 MAKEINFO='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
 =======
 MAKEINFO='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
 >>>>>>> Add start of memory read
+=======
+MAKEINFO='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo'
+>>>>>>> Début Arm Instruction
 MKDIR_P='/usr/bin/mkdir -p'
 OBJEXT='o'
 PACKAGE='arm_simulator'
@@ -3814,10 +3842,14 @@ htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
 <<<<<<< HEAD
+<<<<<<< HEAD
 install_sh='${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
 =======
 install_sh='${SHELL} /home/frooz/Documents/PROG/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
 >>>>>>> Add start of memory read
+=======
+install_sh='${SHELL} /home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh'
+>>>>>>> Début Arm Instruction
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'
@@ -3925,12 +3957,14 @@ config.status:901: creating config.h
 config.status:1082: config.h is unchanged
 config.status:1130: executing depfiles commands
 config.status:1207: cd Examples       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
-make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
-make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
+make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/Examples'
+make[1]: Nothing to be done for 'am--depfiles'.
+make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/Examples'
 config.status:1212: $? = 0
 config.status:1207: cd .       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
-make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
-make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4'
+make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
+make[1]: Nothing to be done for 'am--depfiles'.
+make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4'
 config.status:1212: $? = 0
 
 ## ---------------------- ##

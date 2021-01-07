@@ -38,6 +38,7 @@ memory memory_create(size_t size, int is_big_endian)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     fprintf(stderr, "La taille est de : %ld\n", size);
 >>>>>>> Add start of memory read
@@ -45,6 +46,8 @@ memory memory_create(size_t size, int is_big_endian)
 >>>>>>> Start of reading memory's word
 =======
 >>>>>>> Start of reading memory's word
+=======
+>>>>>>> Début Arm Instruction
     memory mem = NULL;
     mem = malloc(sizeof(struct memory_data));
     if (mem == NULL)
@@ -54,12 +57,17 @@ memory memory_create(size_t size, int is_big_endian)
     else
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         mem->data = malloc(sizeof(uint8_t *) * size);
         if (mem->data == NULL)
 =======
         mem->donnees = malloc(sizeof(uint8_t) * size);
         if (mem->donnees == NULL)
 >>>>>>> Add start of memory read
+=======
+        mem->data = malloc(sizeof(uint8_t *) * size);
+        if (mem->data == NULL)
+>>>>>>> Début Arm Instruction
         {
             free(mem);
             mem = NULL;
@@ -81,6 +89,9 @@ size_t memory_get_size(memory mem)
 void memory_destroy(memory mem)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Début Arm Instruction
     free(mem->data);
 =======
     free(mem->donnees);
@@ -90,6 +101,7 @@ void memory_destroy(memory mem)
 
 int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
     if(address < memory_get_size(mem)){
         *value = *(mem->data+address);
@@ -114,6 +126,13 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
     {
         return 0;
 >>>>>>> Add start of memory read
+=======
+    if(address < memory_get_size(mem)){
+        *value = *(mem->data+address);
+        return 0;
+    } else {
+        return -1;
+>>>>>>> Début Arm Instruction
     }
 }
 
@@ -121,12 +140,16 @@ int memory_read_half(memory mem, uint32_t address, uint16_t *value)
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Début Arm Instruction
     if(address < memory_get_size(mem)){
         *value = 0;
         uint8_t v = 0;
         uint16_t v2 = 0;
         for (int i = 0; i < sizeof(uint16_t); i++)
         {
+<<<<<<< HEAD
             memory_read_byte(mem, i, &v);
             v2 = (uint16_t)v;
             *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint16_t) - i - 1)));
@@ -177,6 +200,14 @@ int memory_read_half(memory mem, uint32_t address, uint16_t *value)
     }
     else
     {
+=======
+            memory_read_byte(mem, i, &v);
+            v2 = (uint16_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint16_t) - i - 1)));
+        }
+        return 0;
+    } else {
+>>>>>>> Début Arm Instruction
         return -1;
     }
 >>>>>>> add memory version
@@ -186,12 +217,16 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Début Arm Instruction
     if(address < memory_get_size(mem)){
         *value = 0;
         uint8_t v = 0;
         uint32_t v2 = 0;
         for (int i = address; i < sizeof(uint32_t); i++)
         {
+<<<<<<< HEAD
             memory_read_byte(mem, i, &v);
             v2 = (uint32_t)v;
             *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
@@ -230,14 +265,23 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
             // fprintf(stderr, "Bit: %d, Octet n°%i : %i\n", i * 8, i, v);
             *value |= (v2 << (8 * (sizeof(uint32_t) - i - 1)));
             i++;
+=======
+            memory_read_byte(mem, i, &v);
+            v2 = (uint32_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
+>>>>>>> Début Arm Instruction
         }
 
         // fprintf(stderr, "\n\nLe mot est : %d", *value);
         return 0;
+<<<<<<< HEAD
     }
     else
     {
 >>>>>>> Add start of memory read
+=======
+    } else {
+>>>>>>> Début Arm Instruction
         return -1;
     }
 }
@@ -245,10 +289,14 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
 int memory_write_byte(memory mem, uint32_t address, uint8_t value)
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Début Arm Instruction
     if(address < memory_get_size(mem)){
         *(mem->data + address) = value;
         return 0;
     } else {
+<<<<<<< HEAD
 =======
     if (mem->be == 0)
     {
@@ -263,6 +311,8 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
     else
     {
 >>>>>>> Add start of memory read
+=======
+>>>>>>> Début Arm Instruction
         return -1;
     }
 }
@@ -271,11 +321,15 @@ int memory_write_half(memory mem, uint32_t address, uint16_t value)
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Début Arm Instruction
     if(address < memory_get_size(mem)){
         uint8_t value2 = 0;
         for (int i = address; i < sizeof(uint16_t); i++)
         {
             value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint16_t) - i - 1)) >> 8 * (sizeof(uint16_t) - i - 1);
+<<<<<<< HEAD
             memory_write_byte(mem, i, value2);
         }
         return 0;
@@ -294,10 +348,13 @@ int memory_write_half(memory mem, uint32_t address, uint16_t value)
         {
             value2 = (value + i) >> 8 * i;
             // fprintf(stderr, "Nb F : %d, Bit: %d, Octet n°%i : %d\n", (i+1), i * 8, i, value2);
+=======
+>>>>>>> Début Arm Instruction
             memory_write_byte(mem, i, value2);
             i++;
         }
         return 0;
+<<<<<<< HEAD
     }
     else if (mem->be == 1)
     {
@@ -309,6 +366,9 @@ int memory_write_half(memory mem, uint32_t address, uint16_t value)
             memory_write_byte(mem, i, value2);
             i++;
         }
+=======
+    } else {
+>>>>>>> Début Arm Instruction
         return -1;
     }
     else
@@ -322,11 +382,15 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Début Arm Instruction
     if(address < memory_get_size(mem)){
         uint8_t value2 = 0;
         for (int i = address; i < sizeof(uint32_t); i++)
         {
             value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint32_t) - i - 1)) >> 8 * (sizeof(uint32_t) - i - 1);
+<<<<<<< HEAD
             memory_write_byte(mem, i, value2);
         }
         return 0;
@@ -352,14 +416,21 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
         {
             int decal = (sizeof(uint32_t) - i - 1);
             value2 = (value + decal) >> 8 * decal;
+=======
+>>>>>>> Début Arm Instruction
             memory_write_byte(mem, i, value2);
             i++;
         }
+<<<<<<< HEAD
         return -1;
     }
     else
     {
 >>>>>>> Add start of memory read
+=======
+        return 0;
+    } else {
+>>>>>>> Début Arm Instruction
         return -1;
     }
 }

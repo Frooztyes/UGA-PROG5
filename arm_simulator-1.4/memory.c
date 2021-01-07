@@ -21,6 +21,7 @@ Contact: Guillaume.Huard@imag.fr
 	 38401 Saint Martin d'H�res
 */
 #include <stdlib.h>
+#include <stdio.h>
 #include "memory.h"
 #include "util.h"
 #include <stdio.h>

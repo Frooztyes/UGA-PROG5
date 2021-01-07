@@ -3767,6 +3767,7 @@ configure: exit 0
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Start of reading memory's word
 =======
@@ -3867,3 +3868,5 @@ on DESKTOP-JKNVT0F
 config.status:901: creating config.h
 config.status:1082: config.h is unchanged
 >>>>>>> add memory version
+=======
+>>>>>>> 97191859c9d711ae4e86a137337113ae0008ecb9

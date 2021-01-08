@@ -28,10 +28,52 @@ Contact: Guillaume.Huard@imag.fr
 #include "arm_constants.h"
 #include "util.h"
 
+void printBits(size_t const size, void const * const ptr)
+{
+    unsigned char *b = (unsigned char*) ptr;
+    unsigned char byte;
+    int i, j;
+    
+    for (i = size-1; i >= 0; i--) {
+        for (j = 7; j >= 0; j--) {
+            byte = (b[i] >> j) & 1;
+            fprintf(stderr, "%u", byte);
+        }
+    }
+    puts("");
+}
+
+
 static int arm_execute_instruction(arm_core p) {
-    uint32_t value;
-    arm_fetch(p, &value);
-    fprintf(stderr, "Resultat : %d", value);
+    uint32_t ins;
+    arm_fetch(p,&ins);
+    printBits(sizeof(ins), &ins);
+    switch(get_bits(ins,27,25)){
+        case 0b000:
+            printf("je suis dans arm shift");
+            arm_data_processing_shift(p,ins);
+            break;
+        case 0b001:
+            arm_data_processing_immediate_msr(p,ins);
+            break;
+        case 0b010:
+            break;
+        case 0b011:
+            break;
+        case 0b100:
+            arm_load_store_multiple(p,ins);
+            break;
+        case 0b101:
+            arm_branch(p,ins);
+            break;
+        case 0b110:
+            arm_coprocessor_load_store(p,ins);
+            break;
+        case 0b111:
+            break;
+        default:
+            break;
+    }
     return 0;
 }
 
@@ -39,7 +81,9 @@ int arm_step(arm_core p) {
     int result;
 
     result = arm_execute_instruction(p);
+    
     if (result)
         arm_exception(p, result);
     return result;
 }
+

@@ -105,13 +105,15 @@ static int arm_execute_instruction(arm_core p) {
             break;
 
         case 0b011:
-            if (!get_bit(ins, 4)){
+            if(!get_bit(ins,4)){
                 fprintf(stderr, "load/store register offset\n");
-                // load/store register offset
-                arm_load_store(p, ins);
-            } else{
-                fprintf(stderr, "media isntructions\n");
-                // media isntructions
+                //load/store register offset
+                arm_load_store(p,ins);
+            }else{
+                if(get_bits(ins,24,20) && get_bits(ins,7,4)){
+                    fprintf(stderr, "Architecturally Undifined \n");
+                }
+                fprintf(stderr,"media instructions\n");
             }
             break;
 

@@ -44,78 +44,100 @@ void printBits(size_t const size, void const * const ptr)
 }
 
 static int arm_execute_instruction(arm_core p) {
-    uint32_t ins, error;
-    error = arm_fetch(p, &ins);
-    if(error == -1){
-        // printf("Error while fetching instruction...\n");
-        return 1;
-    } else {
-        printBits(sizeof(ins), &ins);
-        printf("\n");
-        switch (get_bits(ins, 27, 25))
-        {
-            case 0b000:
-                switch ((get_bit(ins, 7) << 1) + get_bit(ins, 4))
-                {
-                    case 0b00:
-                        // printf("In 00\n");
-                        break;
+    uint32_t ins;
+    arm_fetch(p, &ins);
+    printBits(sizeof(ins), &ins);
+    printf("\n");
+    switch (get_bits(ins, 27, 25))
+    {
+        case 0b000:
+            switch ((get_bits(ins, 24, 23) << 3) | (get_bit(ins, 20) << 2) | (get_bit(ins, 7) << 1) | get_bit(ins, 4))
+            {
+                case 0b10000: // misc instruction
+                case 0b10010: // misc instruction
+                case 0b10001: // misc instruction
+                    fprintf(stderr, "misc instruction\n");
+                    arm_miscellaneous(p, ins);
+                    break;
 
-                    case 0b10:
-                        printf("In 10\n");
-                        break;
+                case 0b00000: // data processing immediate shift
+                case 0b00001: // data processing register shift
+                    fprintf(stderr, "data processing register shift / data processing immediate shift\n");
+                    arm_data_processing_shift(p, ins);
+                    break;
+                    
+                default:
+                    if(get_bit(ins, 4) && get_bit(ins, 7)){
+                        // multiply or extraload
+                        fprintf(stderr, "multiply or extraload\n");
+                    }
+                    printf("Default\n");
+                    break;
+            }
+            break;
 
-                    case 0b01:
-                        printf("In 01\n");
-                        break;
+        case 0b001:
+            switch (get_bits(ins, 24, 20))
+            {
+                case 0b10000:
+                case 0b10100:
+                    fprintf(stderr, "undefined instruction\n");
+                    // undefined instruction
+                    break;
+                
+                case 0b10010:
+                case 0b10110:
+                    fprintf(stderr, "move immediate to status register\n");
+                    // move immediate to status register
+                    break;
 
-                    case 0b11:
-                        printf("In 11\n");
-                        break;
-                        
-                    default:
-                        printf("Default\n");
-                        break;
-                }
-                break;
+                default:
+                    // opcode + S ; data processing immediate
+                    fprintf(stderr, "data processing immediate\n");
+                    arm_data_processing_immediate_msr(p,ins);
+                    break;
+            }
+            break;
 
-            case 0b001:
-                printf("Not implemented\n");
-                break;
+        case 0b010: // Load/store immediate offset 
+            fprintf(stderr, "Load/store immediate offset\n");
+            arm_load_store(p, ins);
+            break;
 
-            case 0b010: // Load/store immediate offset 
-                fprintf(stderr, "Load/store immediate offset\n");
+        case 0b011:
+            if (!get_bit(ins, 4)){
+                fprintf(stderr, "load/store register offset\n");
+                // load/store register offset
                 arm_load_store(p, ins);
-                break;
+            } else{
+                fprintf(stderr, "media isntructions\n");
+                // media isntructions
+            }
+            break;
 
-            case 0b011:
-                printf("Not implemented\n");
-                break;
+        case 0b100: // Load/store multiple
+            fprintf(stderr, "Load/store multiple\n");
+            arm_load_store_multiple(p, ins);
+            break;
 
-            case 0b100: // Load/store multiple
-                fprintf(stderr, "Load/store multiple\n");
-                arm_load_store_multiple(p, ins);
-                break;
+        case 0b101: // Branch and branch with link
+            fprintf(stderr, "Branch and branch with link\n");
+            arm_branch(p, ins);
+            break;
 
-            case 0b101: // Branch and branch with link
-                fprintf(stderr, "Branch and branch with link\n");
-                arm_branch(p, ins);
-                break;
+        case 0b110: // Coprocessor load/store and double register transfers
+            fprintf(stderr, "Coprocessor load/store\n");
+            arm_coprocessor_load_store(p, ins);
+            break;
 
-            case 0b110: // Coprocessor load/store and double register transfers
-                fprintf(stderr, "Coprocessor load/store\n");
-                arm_coprocessor_load_store(p, ins);
-                break;
-
-            case 0b111:
-                fprintf(stderr, "coprocessor_others_swi\n");
-                arm_coprocessor_others_swi(p, ins);
-                break;
-            
-            default:
-                printf("Default base\n");
-                break;
-        }
+        case 0b111:
+            fprintf(stderr, "coprocessor_others_swi\n");
+            arm_coprocessor_others_swi(p, ins);
+            break;
+        
+        default:
+            printf("Default base\n");
+            break;
     }
     return 0;
     

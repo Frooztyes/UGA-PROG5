@@ -75,12 +75,18 @@ memory memory_create(size_t size, int is_big_endian)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> add memory version
+=======
+>>>>>>> debut arm_instructions
         mem->data = malloc(sizeof(uint8_t *) * size);
 =======
         mem->data = malloc(sizeof(uint8_t) * size);
 >>>>>>> add memory version
+=======
+        mem->data = malloc(sizeof(uint8_t *) * size);
+>>>>>>> debut arm_instructions
         if (mem->data == NULL)
 =======
         mem->donnees = malloc(sizeof(uint8_t) * size);
@@ -163,6 +169,7 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value) {
 >>>>>>> add memory version
 int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
 {
+<<<<<<< HEAD
     if (mem->be == 0)
     {
 <<<<<<< HEAD
@@ -186,11 +193,18 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
     else
     {
 >>>>>>> add memory version
+=======
+    if(address < memory_get_size(mem)){
+        *value = *(mem->data+address);
+        return 0;
+    } else {
+>>>>>>> debut arm_instructions
         return -1;
 >>>>>>> Début Arm Instruction
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int memory_read_half(memory mem, uint32_t address, uint16_t *value)
 {
@@ -291,41 +305,39 @@ void mem_half_read_bytes(memory mem, uint32_t address, uint16_t *value)
     }
 }
 
+=======
+>>>>>>> debut arm_instructions
 int memory_read_half(memory mem, uint32_t address, uint16_t *value)
 {
-    *value = 0;
-    mem_half_read_bytes(mem, address, &*value);
-    return 0;
-}
-
-int memory_read_word(memory mem, uint32_t address, uint32_t *value)
-{
-    *value = 0;
-    mem_word_read_bytes(mem, address, &*value);
-    return 0;
-}
-
-int memory_write_byte(memory mem, uint32_t address, uint8_t value)
-{
-    if (mem->be == 0)
-    {
-        *(mem->data + address) = value;
+    if(address < memory_get_size(mem)){
+        *value = 0;
+        uint8_t v = 0;
+        uint16_t v2 = 0;
+        for (int i = 0; i < sizeof(uint16_t); i++)
+        {
+            memory_read_byte(mem, i, &v);
+            v2 = (uint16_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint16_t) - i - 1)));
+        }
         return 0;
-    }
-    else if (mem->be == 1)
-    {
-        *(mem->data + (mem->taille - address - 1)) = value;
-        return 0;
+<<<<<<< HEAD
     }
     else
     {
 >>>>>>> add memory version
+<<<<<<< HEAD
 >>>>>>> add memory version
+=======
+=======
+    } else {
+>>>>>>> debut arm_instructions
+>>>>>>> debut arm_instructions
         return -1;
     }
 >>>>>>> add memory version
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 int memory_read_word(memory mem, uint32_t address, uint32_t *value)
@@ -475,26 +487,21 @@ struct memory_data
 };
 
 memory memory_create(size_t size, int is_big_endian)
+=======
+int memory_read_word(memory mem, uint32_t address, uint32_t *value)
+>>>>>>> debut arm_instructions
 {
-    memory mem = NULL;
-    mem = malloc(sizeof(struct memory_data));
-    if (mem == NULL)
-    {
-        return NULL;
-    }
-    else
-    {
-        mem->data = malloc(sizeof(uint8_t) * size);
-        if (mem->data == NULL)
+    if(address < memory_get_size(mem)){
+        *value = 0;
+        uint8_t v = 0;
+        uint32_t v2 = 0;
+        for (int i = address; i < sizeof(uint32_t); i++)
         {
-            free(mem);
-            mem = NULL;
+            memory_read_byte(mem, i, &v);
+            v2 = (uint32_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
         }
-        else
-        {
-            mem->taille = size;
-            mem->be = is_big_endian;
-        }
+<<<<<<< HEAD
     }
     return mem;
 }
@@ -558,6 +565,9 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
     if(address < memory_get_size(mem)){
         *(mem->data + address) = value;
         return 0;
+=======
+        return 0;
+>>>>>>> debut arm_instructions
     } else {
 <<<<<<< HEAD
 =======
@@ -580,6 +590,7 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
     }
 }
 
+<<<<<<< HEAD
 int memory_write_half(memory mem, uint32_t address, uint16_t value)
 {
 <<<<<<< HEAD
@@ -636,12 +647,14 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
     return 0;
 }
 
+=======
+>>>>>>> debut arm_instructions
 int memory_write_byte(memory mem, uint32_t address, uint8_t value)
 {
-    if (mem->be == 0)
-    {
+    if(address < memory_get_size(mem)){
         *(mem->data + address) = value;
         return 0;
+<<<<<<< HEAD
     }
     else if (mem->be == 1)
     {
@@ -651,6 +664,9 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
     else
     {
 >>>>>>> add memory version
+=======
+    } else {
+>>>>>>> debut arm_instructions
         return -1;
     }
 =======
@@ -753,19 +769,22 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
 =======
 int memory_write_half(memory mem, uint32_t address, uint16_t value)
 {
-    uint8_t value2 = 0;
-    for (int i = address; i < sizeof(uint16_t); i++)
-    {
-        value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint16_t) - i - 1)) >> 8 * (sizeof(uint16_t) - i - 1);
-        memory_write_byte(mem, i, value2);
+    if(address < memory_get_size(mem)){
+        uint8_t value2 = 0;
+        for (int i = address; i < sizeof(uint16_t); i++)
+        {
+            value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint16_t) - i - 1)) >> 8 * (sizeof(uint16_t) - i - 1);
+            memory_write_byte(mem, i, value2);
+        }
+        return 0;
+    } else {
+        return -1;
     }
-    return 0;
 }
-
-//erreur value donne une valeur bizarre
 
 int memory_write_word(memory mem, uint32_t address, uint32_t value)
 {
+<<<<<<< HEAD
     
     uint8_t value2 = 0;
     for (int i = address; i < sizeof(uint32_t); i++)
@@ -773,6 +792,17 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
         value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint32_t) - i - 1)) >> 8 * (sizeof(uint32_t) - i - 1);
         memory_write_byte(mem, i, value2);
 >>>>>>> add memory version
+=======
+    if(address < memory_get_size(mem)){
+        uint8_t value2 = 0;
+        for (int i = address; i < sizeof(uint32_t); i++)
+        {
+            value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint32_t) - i - 1)) >> 8 * (sizeof(uint32_t) - i - 1);
+            memory_write_byte(mem, i, value2);
+        }
+        return 0;
+    } else {
+        return -1;
+>>>>>>> debut arm_instructions
     }
-    return 0;
 }

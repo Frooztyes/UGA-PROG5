@@ -147,7 +147,9 @@ int arm_step(arm_core p) {
     int result;
     
     result = arm_execute_instruction(p);
+    
     if (result)
         arm_exception(p, result);
     return result;
 }
+

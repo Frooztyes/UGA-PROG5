@@ -34,6 +34,7 @@ struct memory_data
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 memory memory_create(size_t size, int is_big_endian)
 {
 <<<<<<< HEAD
@@ -65,6 +66,11 @@ memory memory_create(size_t size, int is_big_endian)
 {
     memory mem = NULL;
 >>>>>>> add memory version
+=======
+memory memory_create(size_t size, int is_big_endian)
+{
+    memory mem = NULL;
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
     mem = malloc(sizeof(struct memory_data));
     if (mem == NULL)
     {
@@ -72,6 +78,7 @@ memory memory_create(size_t size, int is_big_endian)
     }
     else
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -96,6 +103,10 @@ memory memory_create(size_t size, int is_big_endian)
         mem->data = malloc(sizeof(uint8_t *) * size);
         if (mem->data == NULL)
 >>>>>>> Début Arm Instruction
+=======
+        mem->data = malloc(sizeof(uint8_t *) * size);
+        if (mem->data == NULL)
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         {
             free(mem);
             mem = NULL;
@@ -118,8 +129,11 @@ void memory_destroy(memory mem)
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Début Arm Instruction
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
     free(mem->data);
 =======
     free(mem->donnees);
@@ -127,6 +141,7 @@ void memory_destroy(memory mem)
     free(mem);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
@@ -199,11 +214,20 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
         return 0;
     } else {
 >>>>>>> debut arm_instructions
+=======
+int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
+{
+    if(address < memory_get_size(mem)){
+        *value = *(mem->data+address);
+        return 0;
+    } else {
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         return -1;
 >>>>>>> Début Arm Instruction
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 int memory_read_half(memory mem, uint32_t address, uint16_t *value)
@@ -213,12 +237,17 @@ int memory_read_half(memory mem, uint32_t address, uint16_t *value)
 <<<<<<< HEAD
 =======
 >>>>>>> Début Arm Instruction
+=======
+int memory_read_half(memory mem, uint32_t address, uint16_t *value)
+{
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
     if(address < memory_get_size(mem)){
         *value = 0;
         uint8_t v = 0;
         uint16_t v2 = 0;
         for (int i = 0; i < sizeof(uint16_t); i++)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             memory_read_byte(mem, i, &v);
             v2 = (uint16_t)v;
@@ -332,11 +361,20 @@ int memory_read_half(memory mem, uint32_t address, uint16_t *value)
     } else {
 >>>>>>> debut arm_instructions
 >>>>>>> debut arm_instructions
+=======
+            memory_read_byte(mem, i, &v);
+            v2 = (uint16_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint16_t) - i - 1)));
+        }
+        return 0;
+    } else {
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         return -1;
     }
 >>>>>>> add memory version
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -347,12 +385,17 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
 <<<<<<< HEAD
 =======
 >>>>>>> Début Arm Instruction
+=======
+int memory_read_word(memory mem, uint32_t address, uint32_t *value)
+{
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
     if(address < memory_get_size(mem)){
         *value = 0;
         uint8_t v = 0;
         uint32_t v2 = 0;
         for (int i = address; i < sizeof(uint32_t); i++)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             memory_read_byte(mem, i, &v);
@@ -419,6 +462,11 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value) {
             v2 = (uint32_t)v;
             *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
 >>>>>>> Début Arm Instruction
+=======
+            memory_read_byte(mem, i, &v);
+            v2 = (uint32_t)v;
+            *value |= !mem->be ? (v2 << (8 * i)) : (v2 << (8 * (sizeof(uint32_t) - i - 1)));
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         }
 <<<<<<< HEAD
 
@@ -513,6 +561,7 @@ int memory_read_word(memory mem, uint32_t address, uint32_t *value)
 >>>>>>> Start of reading memory's word
         return 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
     else
     {
@@ -551,10 +600,14 @@ int memory_read_byte(memory mem, uint32_t address, uint8_t *value)
     {
 >>>>>>> add memory version
 >>>>>>> add memory version
+=======
+    } else {
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         return -1;
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int memory_write_byte(memory mem, uint32_t address, uint8_t value)
 {
@@ -586,10 +639,19 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
 >>>>>>> Add start of memory read
 =======
 >>>>>>> Début Arm Instruction
+=======
+int memory_write_byte(memory mem, uint32_t address, uint8_t value)
+{
+    if(address < memory_get_size(mem)){
+        *(mem->data + address) = value;
+        return 0;
+    } else {
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         return -1;
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 int memory_write_half(memory mem, uint32_t address, uint16_t value)
 {
@@ -598,11 +660,16 @@ int memory_write_half(memory mem, uint32_t address, uint16_t value)
 <<<<<<< HEAD
 =======
 >>>>>>> Début Arm Instruction
+=======
+int memory_write_half(memory mem, uint32_t address, uint16_t value)
+{
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
     if(address < memory_get_size(mem)){
         uint8_t value2 = 0;
         for (int i = address; i < sizeof(uint16_t); i++)
         {
             value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint16_t) - i - 1)) >> 8 * (sizeof(uint16_t) - i - 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
             memory_write_byte(mem, i, value2);
         }
@@ -683,10 +750,13 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
             // fprintf(stderr, "Nb F : %d, Bit: %d, Octet n°%i : %d\n", (i+1), i * 8, i, value2);
 =======
 >>>>>>> Début Arm Instruction
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
             memory_write_byte(mem, i, value2);
             i++;
         }
         return 0;
+<<<<<<< HEAD
 <<<<<<< HEAD
     }
     else if (mem->be == 1)
@@ -702,6 +772,9 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
 =======
     } else {
 >>>>>>> Début Arm Instruction
+=======
+    } else {
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         return -1;
     }
     else
@@ -712,6 +785,7 @@ int memory_write_byte(memory mem, uint32_t address, uint8_t value)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int memory_write_word(memory mem, uint32_t address, uint32_t value)
 {
 <<<<<<< HEAD
@@ -719,11 +793,16 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
 <<<<<<< HEAD
 =======
 >>>>>>> Début Arm Instruction
+=======
+int memory_write_word(memory mem, uint32_t address, uint32_t value)
+{
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
     if(address < memory_get_size(mem)){
         uint8_t value2 = 0;
         for (int i = address; i < sizeof(uint32_t); i++)
         {
             value2 = !mem->be ? (value + i) >> 8 * i : (value + (sizeof(uint32_t) - i - 1)) >> 8 * (sizeof(uint32_t) - i - 1);
+<<<<<<< HEAD
 <<<<<<< HEAD
             memory_write_byte(mem, i, value2);
         }
@@ -752,6 +831,8 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
             value2 = (value + decal) >> 8 * decal;
 =======
 >>>>>>> Début Arm Instruction
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
             memory_write_byte(mem, i, value2);
             i++;
         }
@@ -764,6 +845,7 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
 =======
         return 0;
     } else {
+<<<<<<< HEAD
 >>>>>>> Début Arm Instruction
         return -1;
 =======
@@ -802,6 +884,8 @@ int memory_write_word(memory mem, uint32_t address, uint32_t value)
         }
         return 0;
     } else {
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
         return -1;
 >>>>>>> debut arm_instructions
     }

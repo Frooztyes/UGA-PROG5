@@ -4091,6 +4091,7 @@ configure: exit 0
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Add start of memory read
 =======
@@ -4101,6 +4102,12 @@ configure: exit 0
 =======
 >>>>>>> Start of reading memory's word
 >>>>>>> Start of reading memory's word
+=======
+=======
+>>>>>>> Start of reading memory's word
+=======
+>>>>>>> Start of reading memory's word
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -4133,6 +4140,7 @@ config.status:1130: executing depfiles commands
 config.status:1207: cd Examples       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 make[1]: Entering directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/Examples'
 make[1]: Nothing to be done for 'am--depfiles'.
 make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simulator-1.4/Examples'
@@ -4140,6 +4148,8 @@ make[1]: Leaving directory '/home/bonatov/Documents/Projet2/UGA-PROG5/arm_simula
 =======
 >>>>>>> Start of reading memory's word
 <<<<<<< HEAD
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
 make[1]: Entering directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
 make[1]: Leaving directory '/home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/Examples'
 >>>>>>> Start of reading memory's word
@@ -4168,6 +4178,7 @@ on DESKTOP-3V16CN5
 config.status:901: creating config.h
 config.status:1082: config.h is unchanged
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Start of reading memory's word
 =======
@@ -4206,6 +4217,8 @@ make[1]: Nothing to be done for 'am--depfiles'.
 make[1]: Leaving directory '/home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4'
 config.status:1212: $? = 0
 =======
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
 >>>>>>> Add start of memory read
 =======
 =======
@@ -4245,6 +4258,7 @@ config.status:901: creating config.h
 config.status:1082: config.h is unchanged
 >>>>>>> add memory version
 =======
+<<<<<<< HEAD
 >>>>>>> Add start of memory read
 >>>>>>> Add start of memory read
 =======
@@ -4287,6 +4301,8 @@ config.status:1082: config.h is unchanged
 <<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798
 >>>>>>> 97191859c9d711ae4e86a137337113ae0008ecb9
 
 ## ---------------------- ##
@@ -4306,4 +4322,7 @@ on DESKTOP-BHFH8DA
 
 config.status:901: creating config.h
 config.status:1082: config.h is unchanged
+<<<<<<< HEAD
 >>>>>>> debut arm_instructions
+=======
+>>>>>>> 4b294ef363ec05a22c9e6a1f174d47b2d304a798

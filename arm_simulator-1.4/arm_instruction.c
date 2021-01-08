@@ -110,8 +110,14 @@ static int arm_execute_instruction(arm_core p) {
                 // load/store register offset
                 arm_load_store(p, ins);
             } else{
-                fprintf(stderr, "media isntructions\n");
-                // media isntructions
+                if(get_bits(ins, 24, 20) && get_bits(ins, 7, 5)){
+                    fprintf(stderr, "media instructions / architecturally undefined\n");
+                    // media instructions
+                    // architecturally undefined
+                } else {
+                    fprintf(stderr, "media instructions\n");
+                    // media instructions
+                }
             }
             break;
 

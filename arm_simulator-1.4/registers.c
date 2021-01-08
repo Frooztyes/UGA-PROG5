@@ -96,14 +96,10 @@ uint32_t read_spsr(registers r) {
 }
 
 void write_register(registers r, uint8_t reg, uint32_t value) {
-    printf("Reg Avant : %d\n", reg);
     if(reg<37){
-        printf("Reg1 = %d\n", reg);
         uint8_t nbReg = matriceMode[r->mode][reg];
-        printf("Reg2 = %d\n", reg);
         if(nbReg>=0){
             r->reg[nbReg] = value;
-            printf("Reg3 = %d\n", reg);
         }
     }
 }

@@ -27,121 +27,325 @@ Contact: Guillaume.Huard@imag.fr
 #include "util.h"
 #include "debug.h"
 
-uint32_t shift(arm_core p, uint8_t shift,uint8_t shift_imm, uint8_t Rm,uint8_t Rs,uint8_t I){
 
-	int32_t Rm_value = arm_read_register(p,Rm);
-	uint32_t Rs_value;
-
-
-	if(I){
-		Rs_value = arm_read_register(p,Rs);
-
-		
-	}
-	else{
-
-	}
-
+uint32_t get_rs_bits(arm_core p, uint32_t rs, uint8_t max, uint8_t min) {
+	return get_bits(arm_read_register(p, rs), max, min);
 }
 
-int and_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_operand) {
+uint32_t get_rm_bit(arm_core p, uint32_t rm, uint8_t ind) {
+	return get_bit(arm_read_register(p, rm), ind);
+}
+
+uint32_t get_C_flag(arm_core p) {
+	return get_bit(arm_read_cpsr(p), 29);
+}
+
+
+void shifter_value_calculator(uint32_t *shift_value, arm_core p, uint8_t I, uint8_t shift_op, uint8_t Rs, uint8_t Rm, uint32_t shift_imm){
+	uint32_t Rs_reg, Rm_reg = arm_read_register(p, Rm);
+
+	if(I){
+		Rs_reg = arm_read_register(p, Rs);
+		uint32_t rs_7_0 = get_rs_bits(p, Rs, 7, 0);
+		uint32_t rm_31 = get_rm_bit(p, Rm, 31);
+		uint32_t rs_4_0 = get_rs_bits(p, Rs, 4, 0);
+		switch (shift_op)
+		{
+			case LSL: // Logical shift left
+				if(rs_7_0 == 0) {
+					*shift_value = Rm_reg;
+					// shifter carry out = C Flag
+				} else if( rs_7_0 < 32) {
+					*shift_value = Rm_reg << rs_7_0;
+					// shifter carry out = Rm_reg[Rs[7:0] - 1]
+				}else if(rs_7_0 == 32){
+					*shift_value = 0;
+					// shifter carry out = Rm_reg[31]
+				}else{
+					*shift_value = 0;
+					// shifter carry out = 0
+				}
+				break;
+
+			case LSR: // Logical shift right
+				if(rs_7_0 == 0){
+					*shift_value = Rm_reg;
+					// shifter_carry_out = C Flags
+				}else if(rs_7_0 < 32){
+					*shift_value = Rm_reg >> rs_7_0;
+					// shifter_carry_out = Rm[Rs[7:0] - 1]
+				}else if(rs_7_0 == 32){
+					*shift_value = 0;
+					// shifter carry out = Rm_reg[31]
+				}else{
+					*shift_value = 0;
+					//shifter carry out = 0
+				}
+				break;
+
+			case ASR: // Logical shift right
+				
+				if(Rs_reg == 0) {
+					*shift_value = Rm_reg;
+					// shifter_carry_out = C Flags
+				} else if(Rs_reg < 32) {
+					*shift_value = asr(Rm_reg, Rs_reg);
+					// shifter_carry_out = Rm[Rs[7:0] - 1]
+				} else if(Rs_reg >= 32) {
+					if(rm_31 == 1) {
+						*shift_value = 0;
+						// shifter carry out = Rm_reg[31]
+					}  else {
+						*shift_value = 0xFFFFFFFF;
+						//shifter carry out = 0
+					}
+				}
+				break;
+
+			case ROR: // Rotate right
+				if(rs_7_0 == 0) {
+					*shift_value = Rm_reg;
+					// shifter_carry_out = C Flags
+				}else if(rs_4_0 == 0){
+					*shift_value = Rm_reg;
+					// shifter_carry_out = Rm[31]
+				} else if(rs_4_0 > 0) {
+					*shift_value = ror(Rm_reg, rs_4_0);
+					// shifter_carry_out = Rm[Rs[4:0] - 1]
+				}
+				break;
+			
+			default:
+				*shift_value = Rm_reg;
+				break;
+		}
+		// data pro register shift
+	} else {
+		switch (shift_op)
+		{
+			case LSL: // Immediate shift left
+				if(shift_imm == 0) {
+					*shift_value = Rm;
+					// shifter carry out = Rm_reg[31];
+				} else {
+					*shift_value = Rm_reg << shift_imm;
+					// shifter carry out = Rm_reg[31 - shift_imm]
+				}
+				break;
+
+			case LSR: // Logical shift right
+				if(shift_imm == 0){
+					*shift_value = 0;
+					// shifter_carry_out = Rm[31]
+				}else {
+					*shift_value = Rm >> shift_imm;
+					// shifter_carry_out = Rm[shift_imm - 1];
+				}
+				break;
+
+			case ASR: // Logical shift right
+				if (shift_imm == 0)
+					if (get_rm_bit (p, Rm, 31) == 0)
+						*shift_value = 0;
+						//shifter_carry_out = Rm[31]
+					else /* Rm[31] == 1 */
+						*shift_value = 0xFFFFFFFF;
+						//shifter_carry_out = Rm[31]
+				else /* shift_imm > 0 */
+					*shift_value = asr(Rm, shift_imm);
+					//shifter_carry_out = Rm[shift_imm - 1]
+
+				break;
+
+			case ROR: // Logical shift right
+				if(shift_imm == 0){
+					shift_op = (get_C_flag(p) << 31) || (Rm >> 1);
+					//shifter_carry_out = Rm[0]
+				}else{
+					*shift_value = ror(Rm_reg, shift_imm);
+					//shifter_carry_out = Rm[shift_imm - 1];
+				}
+				break;
+			
+			default:
+				*shift_value = Rm_reg;
+				break;
+		}
+		
+		// data pro immediate shift  
+	}
+}
+
+
+void and_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value) {
 	// Rd := Rn AND shifter_operand
 	uint32_t reg_new;
 
 	// read the value of rn in the register and do bit to bit with shifter operand
-	reg_new = arm_read_register(p, rn) & shift_operand;
+	reg_new = arm_read_register(p, rn) & shift_value;
 	arm_write_register(p, rd, reg_new);
-	return 0;
 }
 
-void eor_processing(arm_core p, uint8_t rn, uint8_t rd, uint32_t val_sh,  int s)
+void eor_processing(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value,  int s)
 {
 	//Rd := Rn EOR shifter_operand
-	uint32_t resultat;
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) ^ shift_value;
+    arm_write_register(p,rd, reg_new);
 }
 
-void substract_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t val_shift, int s) {
+void substract_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s) {
 	//Rd := Rn - shifter_operand
-    uint32_t resultat;
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) - shift_value;
+    arm_write_register(p,rd, reg_new);
 	
 }
 
 
-int reverse_sub_processing(arm_core p, uint8_t rn, uint8_t rd, uint32_t val_sh, int s){
+void reverse_sub_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
 	// Rd := shifter_operand - Rn
+	uint32_t reg_new;
+	
+	reg_new = shift_value - arm_read_register(p,rn);
+    arm_write_register(p,rd, reg_new);
+}
 
+void add_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Rn + Shift_value
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) + shift_value;
+    arm_write_register(p,rd, reg_new);
+}
 
+void adc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Rn + Shift_value + Carry Flag
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) + shift_value + get_C_flag(p);
+    arm_write_register(p,rd, reg_new);
+}
 
-	return 0;
+void sbc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Rn + Shift_value - NOT(Carry flag)
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) + shift_value - ~(get_C_flag(p));
+    arm_write_register(p,rd, reg_new);
+}
+
+void rsc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Rn + Shift_value - NOT(Carry flag)
+	uint32_t reg_new;
+	
+	reg_new = shift_value + arm_read_register(p,rn) - ~(get_C_flag(p));
+    arm_write_register(p,rd, reg_new);
+}
+
+void orr_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Rn OR Shift_value
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) | shift_value;
+    arm_write_register(p,rd, reg_new);
+}
+
+void mov_process(arm_core p, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Shift_value
+	uint32_t reg_new;
+	
+	reg_new = shift_value;
+    arm_write_register(p,rd, reg_new);
+}
+
+void bic_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = Rn AND NOT(Shift_value)
+	uint32_t reg_new;
+	
+	reg_new = arm_read_register(p,rn) & ~shift_value;
+    arm_write_register(p,rd, reg_new);
+}
+
+void mvn_process(arm_core p, uint8_t rd, uint32_t shift_value, int s){
+	// Rd = NOT(Shift_value)
+	uint32_t reg_new;
+	
+	reg_new = ~shift_value;
+    arm_write_register(p,rd, reg_new);
 }
 
 
-}
 /* Decoding functions for different classes of instructions */
 int arm_data_processing_shift(arm_core p, uint32_t ins) {
 	fprintf(stderr, "In arm_data_processing_shift\n");
-	int cond, rn, rd, opcode, s;
-	uint8_t shift_amnt, rm;
-	uint32_t val_shift;
+	int /*cond,*/ rn, rd, opcode, s;
+	uint8_t shift_amnt, rm, rs, I, shift_op;
+	uint32_t shift_value;
 
-	cond = get_bits(ins, 31, 28);
 	opcode = get_bits(ins, 24, 21);
-
-	// source register
-	rn = get_bits(ins, 19, 16);
 
 	// destination register
 	rd = get_bits(ins, 15, 12);
-	
-
 	// shifter operand
+	shift_op = get_bits(ins, 6, 5);
 	I = get_bit(ins, 4);
 	shift_amnt = get_bits(ins, 11, 7);
-	s = get_bit(ins, 20);
-	rn = get_bits(ins, 31, 28);
+	rs = get_bits(ins, 11, 6);
 	rm = get_bits(ins, 3, 0);
+	shifter_value_calculator(&shift_value, p, I, shift_op, rs, rm, shift_amnt);
 
-	val_shift = shift();
+	
+	rn = get_bits(ins, 19, 16);
+	s = get_bit(ins, 20);
+	// cond = get_bits(ins, 31, 28);
+
 
 	switch (opcode)
 	{
 		case 0:
 			// Logical AND
 			// Yanis
-			and_process(p, rn, rd, val_shift);
+			and_process(p, rn, rd, shift_value);
 			break;
 
 		case 1:
 			// Logical exclusive OR
-			//Niconnard 
-			eor_processing(p, rn, rd, val_sh, s);
+			// NiCON
+			eor_processing(p, rn, rd, shift_value, s);
 			break;
 
 		case 2:
 			// Substract
-			//Mathis
-			substract_process(p, rn, rd, val_shift, s);
+			// Mathis
+			substract_process(p, rn, rd, shift_value, s);
 			break;
 
-		case 3: //rémi le bg
-			reverse_sub_processing();
+		case 3: // rémi le bg
+			rsc_process(p, rn, rd, shift_value, s);
 			// Reverse substract
 			break;
 
 		case 4:
 			// Add
+			add_process(p, rn, rd, shift_value, s);
 			break;
 
 		case 5:
 			// Add with carry
+			adc_process(p, rn, rd, shift_value, s);
 			break;
 
 		case 6:
 			// Substract with carry
+			sbc_process(p, rn, rd, shift_value, s);
 			break;
 
 		case 7:
 			// Reverse substract with carry
+			rsc_process(p, rn, rd, shift_value, s);
 			break;
 
 		case 8:
@@ -162,21 +366,22 @@ int arm_data_processing_shift(arm_core p, uint32_t ins) {
 
 		case 12:
 			// Logical (inclusive) OR
+			orr_process(p, rn, rd, shift_value, s);
 			break;
 
 		case 13:
 			// Move
+			mov_process(p, rd, shift_value, s);
 			break;
 
 		case 14:
 			// Bit clear
+			bic_process(p, rn, rd, shift_value, s);
 			break;
 
 		case 15:
 			// Move not
-			break;
-
-		default:
+			mvn_process(p, rd, shift_value, s);
 			break;
 	}
 

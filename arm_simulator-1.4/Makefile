@@ -107,9 +107,9 @@ am__objects_1 = csapp.$(OBJEXT) scanner.$(OBJEXT) debug.$(OBJEXT) \
 	gdb_protocol.$(OBJEXT) util.$(OBJEXT) trace.$(OBJEXT) \
 	memory.$(OBJEXT) registers.$(OBJEXT) arm.$(OBJEXT) \
 	arm_constants.$(OBJEXT) arm_core.$(OBJEXT) \
-	arm_exception.$(OBJEXT) arm_instruction.$(OBJEXT) \
-	arm_data_processing.$(OBJEXT) arm_load_store.$(OBJEXT) \
-	arm_branch_other.$(OBJEXT)
+	cond_shift_calculator.$(OBJEXT) arm_exception.$(OBJEXT) \
+	arm_instruction.$(OBJEXT) arm_data_processing.$(OBJEXT) \
+	arm_load_store.$(OBJEXT) arm_branch_other.$(OBJEXT)
 am_arm_simulator_OBJECTS = $(am__objects_1) arm_simulator.$(OBJEXT)
 arm_simulator_OBJECTS = $(am_arm_simulator_OBJECTS)
 arm_simulator_LDADD = $(LDADD)
@@ -144,11 +144,12 @@ am__depfiles_remade = ./$(DEPDIR)/arm.Po \
 	./$(DEPDIR)/arm_core.Po ./$(DEPDIR)/arm_data_processing.Po \
 	./$(DEPDIR)/arm_exception.Po ./$(DEPDIR)/arm_instruction.Po \
 	./$(DEPDIR)/arm_load_store.Po ./$(DEPDIR)/arm_simulator.Po \
-	./$(DEPDIR)/csapp.Po ./$(DEPDIR)/debug.Po \
-	./$(DEPDIR)/gdb_protocol.Po ./$(DEPDIR)/memory.Po \
-	./$(DEPDIR)/memory_test.Po ./$(DEPDIR)/registers.Po \
-	./$(DEPDIR)/scanner.Po ./$(DEPDIR)/send_irq.Po \
-	./$(DEPDIR)/trace.Po ./$(DEPDIR)/util.Po
+	./$(DEPDIR)/cond_shift_calculator.Po ./$(DEPDIR)/csapp.Po \
+	./$(DEPDIR)/debug.Po ./$(DEPDIR)/gdb_protocol.Po \
+	./$(DEPDIR)/memory.Po ./$(DEPDIR)/memory_test.Po \
+	./$(DEPDIR)/registers.Po ./$(DEPDIR)/scanner.Po \
+	./$(DEPDIR)/send_irq.Po ./$(DEPDIR)/trace.Po \
+	./$(DEPDIR)/util.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -265,12 +266,12 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16
+ACLOCAL = ${SHELL} /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/build-aux/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16
+AUTOCONF = ${SHELL} /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/build-aux/missing automake-1.16
 AWK = gawk
 CC = gcc
 CCAS = gcc
@@ -302,7 +303,7 @@ LEX_OUTPUT_ROOT = lex.yy
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/build-aux/missing makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = arm_simulator
@@ -317,10 +318,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1.4
-abs_builddir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4
-abs_srcdir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4
-abs_top_builddir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4
-abs_top_srcdir = /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4
+abs_builddir = /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4
+abs_srcdir = /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4
+abs_top_builddir = /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4
+abs_top_srcdir = /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -339,7 +340,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/bonatov/Documents/Projet/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh
+install_sh = ${SHELL} /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -375,6 +376,7 @@ COMMON = csapp.h csapp.c scanner.h scanner.l debug.h debug.c \
        arm.h arm.c \
        arm_constants.h arm_constants.c \
        arm_core.h arm_core.c \
+       cond_shift_calculator.h cond_shift_calculator.c \
        arm_exception.h arm_exception.c \
        arm_instruction.h arm_instruction.c \
        arm_data_processing.h arm_data_processing.c \
@@ -508,6 +510,7 @@ include ./$(DEPDIR)/arm_exception.Po # am--include-marker
 include ./$(DEPDIR)/arm_instruction.Po # am--include-marker
 include ./$(DEPDIR)/arm_load_store.Po # am--include-marker
 include ./$(DEPDIR)/arm_simulator.Po # am--include-marker
+include ./$(DEPDIR)/cond_shift_calculator.Po # am--include-marker
 include ./$(DEPDIR)/csapp.Po # am--include-marker
 include ./$(DEPDIR)/debug.Po # am--include-marker
 include ./$(DEPDIR)/gdb_protocol.Po # am--include-marker
@@ -893,6 +896,7 @@ distclean: distclean-recursive
 	-rm -f ./$(DEPDIR)/arm_instruction.Po
 	-rm -f ./$(DEPDIR)/arm_load_store.Po
 	-rm -f ./$(DEPDIR)/arm_simulator.Po
+	-rm -f ./$(DEPDIR)/cond_shift_calculator.Po
 	-rm -f ./$(DEPDIR)/csapp.Po
 	-rm -f ./$(DEPDIR)/debug.Po
 	-rm -f ./$(DEPDIR)/gdb_protocol.Po
@@ -959,6 +963,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f ./$(DEPDIR)/arm_instruction.Po
 	-rm -f ./$(DEPDIR)/arm_load_store.Po
 	-rm -f ./$(DEPDIR)/arm_simulator.Po
+	-rm -f ./$(DEPDIR)/cond_shift_calculator.Po
 	-rm -f ./$(DEPDIR)/csapp.Po
 	-rm -f ./$(DEPDIR)/debug.Po
 	-rm -f ./$(DEPDIR)/gdb_protocol.Po

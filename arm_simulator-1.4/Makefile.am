@@ -23,6 +23,7 @@ COMMON=csapp.h csapp.c scanner.h scanner.l debug.h debug.c \
        arm.h arm.c \
        arm_constants.h arm_constants.c \
        arm_core.h arm_core.c \
+       cond_shift_calculator.h cond_shift_calculator.c \
        arm_exception.h arm_exception.c \
        arm_instruction.h arm_instruction.c \
        arm_data_processing.h arm_data_processing.c \

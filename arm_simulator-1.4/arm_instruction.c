@@ -70,6 +70,8 @@ static int arm_execute_instruction(arm_core p) {
                     if(get_bit(ins, 4) && get_bit(ins, 7)){
                         // multiply or extraload
                         fprintf(stderr, "multiply or extraload\n");
+                    } else {
+                        arm_data_processing_shift(p, ins);
                     }
                     printf("Default\n");
                     break;
@@ -146,7 +148,6 @@ static int arm_execute_instruction(arm_core p) {
             break;
     }
     return 0;
-    
 }
 
 int arm_step(arm_core p) {

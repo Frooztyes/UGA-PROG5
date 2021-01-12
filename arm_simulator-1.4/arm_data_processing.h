@@ -25,6 +25,8 @@ Contact: Guillaume.Huard@imag.fr
 #include <stdint.h>
 #include "arm_core.h"
 
+#define ADD 1
+#define SUB 0
 
 /* Decoding functions for different classes of instructions 
 */
@@ -35,79 +37,91 @@ int arm_data_processing_immediate_msr(arm_core p, uint32_t ins);
 */
 uint32_t get_rs_bits(arm_core p, uint32_t rs, uint8_t max, uint8_t min);
 
-/* Récupère la valeur du registre Rs au bit ind
-*/
-uint32_t get_rm_bit(arm_core p, uint32_t rm, uint8_t ind);
+uint32_t get_rm_bit(arm_core p, uint32_t rm, uint8_t ind) ;
 
-/* Récupère le flag N dans le registre CPSR au bit 31
-*/
-int get_N_flag(arm_core p);
+/* TEQ (Test Equivalence) compares a register value with another arithmetic value. 
+The condition flags are updated, based on the result of logically exclusive-ORing the two values, so that subsequent instructions can be conditionally executed. */
+void teq_process(arm_core p, uint8_t rn, uint8_t rd, uint8_t s, uint32_t shift_value,  uint32_t shifter_carry_out);
 
-/* Récupère le flag Z dans le registre CPSR au bit 30
-*/
-int get_Z_flag(arm_core p);
+/* TST (Test) compares a register value with another arithmetic value. 
+The condition flags are updated, based on the result of logically ANDing the two values, so that subsequent instructions can be conditionally executed.*/
+void tst_process(arm_core p, uint8_t rn, uint8_t rd, uint8_t s, uint32_t shift_value,  uint32_t shifter_carry_out);
 
-/* Récupère le flag C dans le registre CPSR au bit 29
-*/
-int get_C_flag(arm_core p);
+/* EOR (Exclusive OR) performs a bitwise Exclusive-OR of two values. 
+The first value comes from a register.
+The second value can be either an immediate value or a value from a register, and can be shifted before the exclusive OR operation.*/
+void eor_process(arm_core p, uint8_t rn, uint8_t rd, uint8_t s, uint32_t shift_value, uint32_t shifter_carry_out);
 
-/* Récupère le flag V dans le registre CPSR au bit 28
-*/
-int get_V_flag(arm_core p);
+/* SUB (Subtract) subtracts one value from a second value.
+The second value comes from a register. 
+The first value can be either an immediate value or a value from a register, and can be shifted before the subtraction. */
+void sub_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
 
-/* Modifie la valeur de shift_value et de shifter_carry_out grâce aux différentes valeurs de l'instruction
-*/
-void shifter_value_calculator(uint32_t *shift_value, uint32_t *shifter_carry_out, arm_core p, uint8_t I, uint8_t shift_op, uint8_t Rs, uint8_t Rm, uint32_t shift_imm);
+/* RSB (Reverse Subtract) subtracts a value from a second value.
+The first value comes from a register. 
+The second value can be either an immediate value or a value from a register, and can be shifted before the subtraction. 
+This is the reverse of the normal order of operands in ARM assembler language. */
+void rsb_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
 
-/* TODO : DESCRIPTION */
-void teq_process(arm_core p,uint8_t rn,uint32_t val_sh);
+/* AND performs a bitwise AND of two values. 
+The first value comes from a register. 
+The second value can be either an immediate value or a value from a register, and can be shifted before the AND operation.*/
+void and_process(arm_core p, uint8_t rn, uint8_t rd, uint8_t s, uint32_t shift_value, uint32_t shifter_carry_out);
 
-/* TODO : DESCRIPTION */
-void and_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value);
-
-/* TODO : DESCRIPTION */
-void eor_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value,  int s);
-
-/* TODO : DESCRIPTION */
-void substract_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
-
-/* TODO : DESCRIPTION */
-void reverse_sub_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
-
-/* TODO : DESCRIPTION */
+/* ADD adds two values. 
+The first value comes from a register. 
+The second value can be either an immediate value or a value from a register, and can be shifted before the addition.*/
 void add_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
 
-/* TODO : DESCRIPTION */
+/* ADC (Add with Carry) adds two values and the Carry flag. 
+The first value comes from a register.
+The second value can be either an immediate value or a value from a register, and can be shifted before the addition.*/
 void adc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
 
-/* TODO : DESCRIPTION */
+/* SBC (Subtract with Carry) subtracts the value of its second operand and the value of NOT(Carry flag) from the value of its first operand. 
+The first operand comes from a register. 
+The second operand can be either an immediate value or a value from a register, and can be shifted before the subtraction.*/
 void sbc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
 
-/* TODO : DESCRIPTION */
+/* RSC (Reverse Subtract with Carry) subtracts one value from another, taking account of any borrow from a preceding less significant subtraction. 
+The normal order of the operands is reversed, to allow subtraction from a shifted register value, or from an immediate value. */
 void rsc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
 
-/* TODO : DESCRIPTION */
-void orr_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
+/* ORR (Logical OR) performs a bitwise (inclusive) OR of two values. 
+The first value comes from a register.
+The second value can be either an immediate value or a value from a register, and can be shifted before the OR operation.*/
+void orr_process(arm_core p, uint8_t rn, uint8_t rd, int s, uint32_t shift_value, uint32_t shifter_carry_out);
 
-/* TODO : DESCRIPTION */
-void mov_process(arm_core p, uint8_t rd, uint32_t shift_value, int s);
+/* MOV (Move) writes a value to the destination register. 
+The value can be either an immediate value or a value from a register, and can be shifted before the write. */
+void mov_process(arm_core p, uint8_t rd, int s, uint32_t shift_value, uint32_t shifter_carry_out);
 
-/* TODO : DESCRIPTION */
-void bic_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s);
+/* BIC (Bit Clear) performs a bitwise AND of one value with the complement of a second value. 
+The first value comes from a register. 
+The second value can be either an immediate value or a value from a register, and can be shifted before the BIC operation.*/
+void bic_process(arm_core p, uint8_t rn, uint8_t rd, int s, uint32_t shift_value, uint32_t shifter_carry_out);
 
-/* TODO : DESCRIPTION */
-void mvn_process(arm_core p, uint8_t rd, uint32_t shift_value, int s);
+/* MVN (Move Not) generates the logical ones complement of a value. 
+The value can be either an immediate value or a value from a register, and can be shifted before the MVN operation. */
+void mvn_process(arm_core p, uint8_t rd, int s, uint32_t shift_value, uint32_t shifter_carry_out);
 
-/* TODO : DESCRIPTION */
-void comp_processing(arm_core p, uint8_t rn, uint32_t shift_value);
+/* CMP (Compare) compares two values. 
+The first value comes from a register. 
+The second value can be either an immediate value or a value from a register, and can be shifted before the comparison.*/
+void cmp_process(arm_core p, uint8_t rn, uint32_t shift_value);
 
-/* TODO : DESCRIPTION */
-void compN_processing(arm_core p, uint8_t rn, uint32_t shift_value);
+/* CMN (Compare Negative) compares one value with the twos complement of a second value. 
+The first value comes from a register. 
+The second value can be either an immediate value or a value from a register, and can be shifted before the comparison.*/
+void cmn_process(arm_core p, uint8_t rn, uint32_t shift_value);
 
-/* Vérifie les valeurs des différents flags Z, N, V et C
-en fonction des bits cond (31 à 28) dans l'instruction.
-*/
-int cond_verifier(arm_core p, uint32_t cond);
+int carryFrom(uint64_t res);
+
+int overflowFrom(uint32_t operande1, uint32_t operande2, uint64_t res, int operation);
+
+int borrowFrom(uint32_t res);
+
+void update_flags(arm_core p, uint8_t z, uint8_t n, uint8_t c, uint8_t v);
 
 #endif
  

@@ -45,7 +45,7 @@ arm_data_processing.o: arm_data_processing.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h memory.h \
  trace_location.h trace.h arm_exception.h arm_constants.h \
- arm_branch_other.h util.h debug.h
+ arm_branch_other.h util.h debug.h cond_shift_calculator.h
 
 /usr/include/stdc-predef.h:
 
@@ -164,3 +164,5 @@ arm_branch_other.h:
 util.h:
 
 debug.h:
+
+cond_shift_calculator.h:

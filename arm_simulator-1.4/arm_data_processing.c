@@ -204,7 +204,7 @@ void add_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s
 	} else if(s == 1) {
 		n = get_bit(reg_new, 31);
 		z = rd == 0 ? 1 : 0;
-		c = carryFrom(arm_read_register(p,rn) + shift_value);
+		c = carryFrom( ((uint64_t)arm_read_register(p,rn)) + ((uint64_t) shift_value));
 		v = overflowFrom(arm_read_register(p,rn), shift_value, reg_new, ADD);
 		update_flags(p, z, n, c, v);
 		}
@@ -445,85 +445,102 @@ int arm_data_processing_shift(arm_core p, uint32_t ins) {
 		{
 			case 0:
 				// Logical AND
-				// Yanis
+				fprintf(stderr, "In and_process\n");
 				and_process(p, rn, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 1:
 				// Logical exclusive OR
-				// NiCONla
+				fprintf(stderr, "In eor_process\n");
 				eor_process(p, rn, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 2:
 				// Substract
-				// Mathis
+				fprintf(stderr, "In sub_process\n");
 				sub_process(p, rn, rd, shift_value, s);
 				break;
 
-			case 3: // rémi le bg
+			case 3:
+				fprintf(stderr, "In rsc_process\n");
 				rsc_process(p, rn, rd, shift_value, s);
 				// Reverse substract
 				break;
 
 			case 4:
 				// Add
+				fprintf(stderr, "In add_process\n");
 				add_process(p, rn, rd, shift_value, s);
 				break;
 
 			case 5:
 				// Add with carry
+				fprintf(stderr, "In adc_process\n");
 				adc_process(p, rn, rd, shift_value, s);
 				break;
 
 			case 6:
 				// Substract with carry
+				fprintf(stderr, "In sbc_process\n");
 				sbc_process(p, rn, rd, shift_value, s);
 				break;
 
 			case 7:
 				// Reverse substract with carry
+				fprintf(stderr, "In rsc_process\n");
 				rsc_process(p, rn, rd, shift_value, s);
 				break;
 
 			case 8:
 				// Test
+				fprintf(stderr, "In tst_process\n");
 				tst_process(p, rn, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 9:
 				// Test equivalence
+				fprintf(stderr, "In teq_process\n");
 				teq_process(p, rn, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 10:
 				// Compare 
+				fprintf(stderr, "In cmp_process\n");
 				cmp_process(p, rn, shift_value);
 				break;
 				
 			case 11:
 				// Compare negated
+				fprintf(stderr, "In cmn_process\n");
 				cmn_process(p, rn, shift_value);
 				break;
 
 			case 12:
 				// Logical (inclusive) OR
+				fprintf(stderr, "In orr_process\n");
 				orr_process(p, rn, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 13:
 				// Move
+				fprintf(stderr, "In mov_process\n");
 				mov_process(p, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 14:
 				// Bit clear
+				fprintf(stderr, "In bic_process\n");
 				bic_process(p, rn, rd, s, shift_value, shifter_carry_out);
 				break;
 
 			case 15:
 				// Move not
+				fprintf(stderr, "In mvn_process\n");
 				mvn_process(p, rd, s, shift_value, shifter_carry_out);
+				break;
+
+			default:
+				fprintf(stderr, "Default\n");
 				break;
 		}
 	}

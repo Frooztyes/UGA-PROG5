@@ -69,11 +69,12 @@ static int arm_execute_instruction(arm_core p) {
                 default:
                     if(get_bit(ins, 4) && get_bit(ins, 7)){
                         // multiply or extraload
-                        fprintf(stderr, "multiply or extraload\n");
+                        printf("arm_load_store\n");
+                        arm_load_store(p, ins);
                     } else {
+                        printf("arm_data_processing_shift\n");
                         arm_data_processing_shift(p, ins);
                     }
-                    printf("Default\n");
                     break;
             }
             break;
@@ -118,7 +119,7 @@ static int arm_execute_instruction(arm_core p) {
                     // architecturally undefined
                 } else {
                     fprintf(stderr, "media instructions\n");
-                    // media instructions
+                    // media instructions                       
                 }
             }
             break;

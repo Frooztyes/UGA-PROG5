@@ -21,107 +21,108 @@ int get_V_flag(arm_core p) {
 	return get_bit(arm_read_cpsr(p), V);
 }
 
-int cond_verifier(arm_core p, uint32_t cond) {
+int cond_verifier(arm_core p, uint8_t cond) {
 
 	switch (cond)
 	{
-		case 0:
+		case 0x0:
 			// EQ
 			// Z set
 			return get_Z_flag(p);
 			break;
 
-		case 1:
+		case 0x1:
 			// NE
 			// Z clear
 			return !get_Z_flag(p);
 			break;
 
-		case 2:
+		case 0x2:
 			// CS/HS
 			// C set
 			return get_C_flag(p);
 			break;
 			
-		case 3:
+		case 0x3:
 			// CC/LO
 			// C clear
 			return !get_C_flag(p);
 			break;
 
-		case 4:
+		case 0x4:
 			// MI
 			// N set
 			return get_N_flag(p);
 			break;
 
-		case 5:
+		case 0x5:
 			// PL
 			// N clear
 			return !get_N_flag(p);
 			break;
 
-		case 6:
+		case 0x6:
 			// VS
 			// V set
-			return get_C_flag(p);
+			return get_V_flag(p);
 			break;
 
-		case 7:
+		case 0x7:
 			// VC
 			// V clear
-			return !get_C_flag(p);
+			return !get_V_flag(p);
 			break;
 
-		case 8:
+		case 0x8:
 			// HI Unsigned higher 
 			// C set and Z clear
 			return get_C_flag(p) && get_Z_flag(p);
 			break;
 		
-		case 9:
+		case 0x9:
 			// LS Unsigned lower or equal
 			// C clear or Z set
 			return !get_C_flag(p) && get_Z_flag(p);
 			break;
 
-		case 10:
+		case 0xA:
 			// GE signed greater than or equal 
 			// (N set and V set) or (N clear and V clear)
-			return (get_N_flag(p) && get_V_flag(p)) || (!get_N_flag(p) && !get_V_flag(p));
+			return get_N_flag(p) == get_V_flag(p);
 			break;
 
-		case 11:
+		case 0xB:
 			// LT 
 			// (N set and V clear) or (N clear and V set)
-			return (get_N_flag(p) && !get_V_flag(p)) || (!get_N_flag(p) && get_V_flag(p));
+			return get_N_flag(p) != get_V_flag(p);
 			break;
 
-		case 12:
+		case 0xC:
 			// GT signed greater than
 			// Z clear and either N set and V set or (N clear and V clear)
-			return !get_Z_flag(p) && ((get_N_flag(p) && get_V_flag(p)) || (!get_N_flag(p) && !get_Z_flag(p)));
+			return get_Z_flag(p) == 0 &&  get_N_flag(p) == get_V_flag(p);
 			break;
 
-		case 13:
+		case 0xD:
 			// LE signed less than or equal
 			// (N set and V clear) or (N clear and V set)
-			return get_Z_flag(p) ||  ((get_N_flag(p) && !get_V_flag(p)) || (!get_N_flag(p) && !get_V_flag(p)));
+			return get_Z_flag(p) == 1 || get_N_flag(p) != get_V_flag(p);
 			break;
 
-		case 14:
+		case 0xE:
 			// AL Always (unconditionnal)
 			// true
 			return 1;
 			break;
 
-		case 15:
+		case 0xF:
 			// -
 			// UNPREDICTABLE
-			return -1;
+			return 0xF;
 			break;
 
 		default:
+			return 1;
 			break;
 	}
 	return 0;

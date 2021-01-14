@@ -32,7 +32,7 @@ Contact: Guillaume.Huard@imag.fr
 int number_of_set_bits_in(uint32_t bitfield)
 {
     int nb = 0;
-    for(int i = 0; i< 31; i++)
+    for(int i = 0; i < 31; i++)
         get_bit(bitfield, i) ? nb++ : 0;
     return nb;
 }

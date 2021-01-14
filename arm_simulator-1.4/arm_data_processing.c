@@ -37,7 +37,7 @@ uint32_t get_rm_bit(arm_core p, uint32_t rm, uint8_t ind) {
 }
 
 int carryFrom(uint64_t res) {
-	return get_bit(res >> 32, 1);
+	return get_bit(res >> 32, 0);
 }
 
 int overflowFrom(uint32_t operande1, uint32_t operande2, uint64_t res, int operation) {
@@ -204,7 +204,7 @@ void add_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s
 	} else if(s == 1) {
 		n = get_bit(reg_new, 31);
 		z = rd == 0 ? 1 : 0;
-		c = carryFrom( ((uint64_t)arm_read_register(p,rn)) + ((uint64_t) shift_value));
+		c = carryFrom(((uint64_t)arm_read_register(p,rn)) + ((uint64_t) shift_value));
 		v = overflowFrom(arm_read_register(p,rn), shift_value, reg_new, ADD);
 		update_flags(p, z, n, c, v);
 		}
@@ -226,7 +226,7 @@ void adc_process(arm_core p, uint8_t rn, uint8_t rd, uint32_t shift_value, int s
 	} else if(s == 1) {
 		z = rd == 0 ? 1 : 0;
 		n = get_bit(reg_new, 31);
-		c = carryFrom(arm_read_register(p,rn) + shift_value + get_C_flag(p));
+		c = carryFrom(((uint64_t)arm_read_register(p,rn)) + ((uint64_t) (shift_value + get_C_flag(p))));
 		v = overflowFrom(arm_read_register(p,rn), shift_value + get_C_flag(p), reg_new, ADD);
 		update_flags(p, z, n, c, v);
 	}   
@@ -412,7 +412,7 @@ void cmn_process(arm_core p, uint8_t rn, uint32_t shift_value) {
 	
 	n = get_bit(alu_out, 31);
 	z = alu_out == 0 ? 1 : 0;
-	c = carryFrom(arm_read_register(p, rn) + shift_value);
+	c = carryFrom(((uint64_t)arm_read_register(p,rn)) + ((uint64_t) shift_value));
 	v = overflowFrom(arm_read_register(p, rn), shift_value, alu_out, ADD);
 	update_flags(p, z, n, c, v);
 }

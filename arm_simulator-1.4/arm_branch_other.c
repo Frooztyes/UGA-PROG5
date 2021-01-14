@@ -28,10 +28,10 @@ Contact: Guillaume.Huard@imag.fr
 #include "cond_shift_calculator.h"
 
 int arm_branch(arm_core p, uint32_t ins) {
-    printf("Instruction branch\n");
+    printf("Instruction branch B/BL\n");
     if(cond_verifier(p, get_bits(ins, 31, 28))) {
         uint32_t pc = arm_read_register(p, 15);
-        // sauvegarde de la valeur de PC dans le link register
+        // sauvegarde de la valeur de PC dans le link register (BL)
         if(get_bit(ins, 24)) {
             arm_write_register(p, 14,  pc - 4);
         }
@@ -80,7 +80,6 @@ int arm_branch(arm_core p, uint32_t ins) {
         } else {
             arm_write_register(p, 15, pc + extended_adr);
         }
-        
 
     }
     return 0;

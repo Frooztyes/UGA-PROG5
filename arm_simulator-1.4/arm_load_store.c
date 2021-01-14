@@ -345,12 +345,7 @@ int arm_load_store_multiple(arm_core p, uint32_t ins) {
             {
                 if(get_bit(register_list, i)){
                     arm_read_word(p, address, &value);
-                    if(get_bit(ins, 22) && get_bit(ins, 20) && !get_bit(ins,15)) {
-                        // LDM 2 for user mode
-                        arm_write_usr_register(p, i, value);
-                    } else {
-                        arm_write_register(p, i, value);
-                    }
+                    arm_write_register(p, i, value);
                     address += 4;
                 }
             }
@@ -360,15 +355,6 @@ int arm_load_store_multiple(arm_core p, uint32_t ins) {
                     value = arm_read_word(p, address, &value);
                     arm_write_register(p, 15, value & 0xFFFFFFFE);
                 }
-            } else if(get_bit(ins, 22) && get_bit(ins, 20) && get_bit(ins, 15)) {
-                // LDM 2 suite
-                if(arm_current_mode_has_spsr(p)) {
-                    arm_write_cpsr(p, arm_read_spsr(p));
-                } else {
-                    // UNPREDICTABLE
-                }
-                value = arm_read_word(p, address, &value);
-                arm_write_register(p, 15, value);
             }
 
             address += 4;
@@ -378,13 +364,7 @@ int arm_load_store_multiple(arm_core p, uint32_t ins) {
             for (int i = 0; i < 15; i++)
             {
                 if(get_bit(register_list, i)){
-                    if(get_bit(ins, 22)) {
-                        // STM (2)
-                        arm_write_word(p, address, arm_read_usr_register(p, i));
-                    } else {
-                        // STM (1)
-                        arm_write_word(p, address, arm_read_register(p, i));
-                    }
+                    arm_write_word(p, address, arm_read_register(p, i));
                     address += 4;
                 }
             }

@@ -25,6 +25,7 @@ Contact: Guillaume.Huard@imag.fr
 #include <stdlib.h>
 #include <stdio.h>
 
+
 int8_t matriceMode[32][18] = {
     {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
     {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, -1}, // USR = 0x10 = 16
@@ -43,6 +44,8 @@ struct registers_data {
     uint32_t reg[37];
     uint8_t mode;
 };
+
+typedef struct registers_data *registers;
 
 registers registers_create() {
     registers r = NULL;
@@ -90,7 +93,7 @@ uint32_t read_spsr(registers r) {
     if(!current_mode_has_spsr(r)){
         return -1;
     }else{
-        value = r->reg[17];
+        value = r->reg[matriceMode[get_mode(r)][17]];
     }
     return value;
 }

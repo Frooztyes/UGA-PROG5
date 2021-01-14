@@ -193,11 +193,11 @@ configure:4194: checking lex output file root
 configure:4208: result: lex.yy
 configure:4213: checking lex library
 configure:4227: gcc -o conftest -Wall -Werror -g   conftest.c   >&5
-/usr/bin/ld: /tmp/ccMcg98l.o: in function `yylex':
+/usr/bin/ld: /tmp/ccPEO9YD.o: in function `yylex':
 /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/lex.yy.c:871: undefined reference to `yywrap'
-/usr/bin/ld: /tmp/ccMcg98l.o: in function `input':
+/usr/bin/ld: /tmp/ccPEO9YD.o: in function `input':
 /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/lex.yy.c:1180: undefined reference to `yywrap'
-/usr/bin/ld: /tmp/ccMcg98l.o: in function `main':
+/usr/bin/ld: /tmp/ccPEO9YD.o: in function `main':
 /home/frooz/Documents/PROG/Test/UGA-PROG5/arm_simulator-1.4/conftest.l:17: undefined reference to `yywrap'
 collect2: error: ld returned 1 exit status
 configure:4227: $? = 1
@@ -3511,10 +3511,13 @@ on DESKTOP-JKNVT0F
 config.status:901: creating Examples/Makefile
 config.status:901: creating Makefile
 config.status:901: creating config.h
+config.status:1082: config.h is unchanged
 config.status:1130: executing depfiles commands
 config.status:1207: cd Examples       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:1212: $? = 0
 config.status:1207: cd .       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:1212: $? = 0
 
 ## ---------------- ##
